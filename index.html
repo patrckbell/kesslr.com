@@ -111,20 +111,30 @@
     }
 
     @media (max-width: 768px) {
-      .branding {
-        flex-direction: column;
-        gap: 80px;
-      }
+  .branding {
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+  }
 
-      .text-block {
-        align-items: center;
-      }
+  .logo {
+    margin-top: 40px;
+  }
 
-      .footer {
-        font-size: 1em;
-        bottom: 30px;
-      }
-    }
+  .content {
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .text-block {
+    margin-top: 0; /* ensure no added offset here */
+  }
+
+  .footer {
+    font-size: 1em;
+    bottom: 30px;
+  }
+}
   </style>
 </head>
 <body>
