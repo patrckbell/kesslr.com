@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    <title>Kesslr Labs - About Us</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;500;700&display=swap');
+        :root { --font-display: clamp(28px, 3.5vw, 44px); --font-h1: clamp(24px, 3vw, 36px); --font-h2: clamp(20px, 2.5vw, 28px); --font-body: clamp(15px, 1.6vw, 17px); }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0a0a0a;
+            font-family: 'Inter', sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        /* Header Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            opacity: 0.8;
+            transform: translateY(-1px);
+        }
+        
+        .logo img {
+            height: 1.5rem;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-menu li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+        
+        .nav-menu li a:hover {
+            opacity: 1;
+            transform: translateY(-1px);
+        }
+        
+        .header-cta {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            padding: 0.5rem 1.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-cta:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Mobile-friendly adjustments */
+        img, video { max-width: 100%; height: auto; }
+        .responsive-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .responsive-table table { width: 100%; border-collapse: collapse; }
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .container { padding: 0 1rem; }
+            .content-section { padding: 1.5rem; }
+            .values-grid, .founders-grid, .card-grid { grid-template-columns: 1fr !important; }
+            .footer-content { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-bottom-content { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+        @media (max-width: 480px) {
+            .hero-title { font-size: clamp(26px, 8vw, 34px); }
+            .hero-subtitle { font-size: 1.1rem; }
+        }
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            padding: 8rem 0 4rem 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .hero-section {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0 0 1rem 0;
+            letter-spacing: 0.05em;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #ffffff;
+            opacity: 0.9;
+            margin: 0;
+        }
+        
+        .content-section {
+            margin-bottom: 4rem;
+            background: rgba(15, 15, 15, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-title {
+            font-size: var(--font-h1);
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0 0 2rem 0;
+            letter-spacing: 0.05em;
+            animation: fadeUp 200ms ease-out both;
+        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: translateY(0);} }
+        
+        .section-content {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #ffffff;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(20px);
+        }
+        
+        .highlight-box h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0 0 1rem 0;
+        }
+        
+        .highlight-box p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #ffffff;
+            opacity: 0.9;
+            margin: 0;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .value-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .value-item h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0 0 1rem 0;
+        }
+        
+        .value-item p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #ffffff;
+            opacity: 0.8;
+            margin: 0;
+        }
+        
+        /* Footer Section */
+        .footer {
+            background: rgba(5, 5, 5, 0.95);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 10;
+            padding: 4rem 0 2rem 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 2rem;
+        }
+        
+        .footer-section h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0 0 1.5rem 0;
+            letter-spacing: 0.05em;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo img {
+            height: 2rem;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+        
+        .footer-logo span {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        
+        .footer-tagline {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #ffffff;
+            margin: 0 0 1rem 0;
+            opacity: 0.9;
+        }
+        
+        .footer-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #ffffff;
+            opacity: 0.8;
+            margin: 0;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-section ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-section ul li a:hover {
+            opacity: 1;
+            color: #ffffff;
+        }
+        
+        .coming-soon {
+            color: #ffffff;
+            font-size: 0.95rem;
+            opacity: 0.5;
+            cursor: not-allowed;
+            position: relative;
+        }
+        
+        .coming-soon::after {
+            content: "\A(Coming Soon)";
+            font-size: 0.8rem;
+            opacity: 0.7;
+            white-space: pre;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            opacity: 1;
+            color: #ffffff;
+        }
+        
+        .contact-info p {
+            color: #ffffff;
+            font-size: 0.95rem;
+            margin: 0.5rem 0;
+            opacity: 0.8;
+        }
+        
+        .contact-info a {
+            color: #ffffff;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-info a:hover {
+            opacity: 1;
+            color: #ffffff;
+        }
+        /* Progress bar */
+        .progress-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: #ffffff; z-index: 1000; transition: width 0.1s ease-out; }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+        
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-bottom-content p {
+            color: #ffffff;
+            font-size: 0.9rem;
+            margin: 0;
+            opacity: 0.7;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            color: #ffffff;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .footer-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <a href="/" class="logo">
+            <img src="/assets/img/Logo.png" alt="Kesslr Labs Logo" />
+            KESSLR LABS
+        </a>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/arcturus/">Arcturus</a></li>
+                <li><a href="/about/" aria-current="page">About Us</a></li>
+                <li><a href="/investors/">For Investors</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <h1 class="hero-title">About Us</h1>
+            </section>
+            
+            <!-- Our Story -->
+            <section class="content-section">
+                <h2 class="section-title">Our Story</h2>
+                <div class="section-content">
+                    <p>While working at Rocket Lab, we witnessed firsthand the challenges space companies face with outdated computing systems. We saw brilliant teams struggle with decades-old technology that couldn't keep up with modern demands.</p>
+                    
+                    <p>We believed space technology should be as accessible and powerful as modern AI, not held back by systems designed in a different era. So we left successful careers to solve a problem we knew intimately from hundreds of test flights.</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>The Problem We Saw</h3>
+                    <p>Space companies were stuck choosing between reliable but outdated systems and powerful but unsuitable modern technology. We knew there had to be a better way.</p>
+                </div>
+            </section>
+            
+            <!-- Our Mission -->
+            <section class="content-section">
+                <h2 class="section-title">Our Mission</h2>
+                <div class="section-content">
+                    <p><strong>"Making Space Easy"</strong> means democratizing access to advanced space technology. We're breaking down the technical and cost barriers that prevent innovation in space, giving small teams the tools that once required massive budgets.</p>
+                    
+                    <p>We're empowering the next generation of space entrepreneurs to compete with established players, accelerating innovation and enabling dreams that were previously impossible.</p>
+                </div>
+            </section>
+            
+            <!-- The Founders -->
+            <section class="content-section">
+                <h2 class="section-title">The Founders</h2>
+                <div class="section-content">
+                    <p>Our team brings deep experience from Rocket Lab, one of the most successful private space companies. We have direct knowledge from hundreds of actual space missions and understand both the technical challenges and business realities of space.</p>
+                    
+                    <p>We're driven by passion for innovation and a desire to solve problems we lived through firsthand. Our unique position allows us to bridge the gap between heritage systems and modern AI.</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>Why We Started</h3>
+                    <p>We were frustrated watching brilliant space companies struggle with outdated tools. We believed modern computing could work in space if designed properly, and we were in a unique position to make it happen.</p>
+                </div>
+            </section>
+            
+            <!-- Our Values -->
+            <section class="content-section">
+                <h2 class="section-title">Our Values</h2>
+                <div class="values-grid">
+                    <div class="value-item">
+                        <h4>Mission-First</h4>
+                        <p>Every decision is driven by what's best for space missions and the people who depend on them.</p>
+                    </div>
+                    <div class="value-item">
+                        <h4>Accessibility</h4>
+                        <p>Making advanced technology available to everyone, not just the industry giants.</p>
+                    </div>
+                    <div class="value-item">
+                        <h4>Reliability</h4>
+                        <p>Building systems that work when failure isn't an option, every single time.</p>
+                    </div>
+                    <div class="value-item">
+                        <h4>Innovation</h4>
+                        <p>Constantly pushing what's possible in space technology and never settling for the status quo.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- The Impact -->
+            <section class="content-section">
+                <h2 class="section-title">The Impact We Want</h2>
+                <div class="section-content">
+                    <p>We're leveling the playing field, allowing small companies to compete with established players. We're accelerating innovation with faster development cycles for space technology.</p>
+                    
+                    <p>Most importantly, we're enabling dreams and supporting the next generation of space entrepreneurs who will advance humanity's expansion into space.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <img src="/assets/img/Logo.png" alt="Kesslr Labs Logo" />
+                    <span>KESSLR LABS</span>
+                </div>
+                <p class="footer-tagline">Making Space Easy.</p>
+                <p class="footer-description">
+                    Radiation-tolerant, deterministic, and AI-class compute for aerospace applications.
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="/arcturus/">Arcturus Platform</a></li>
+                    <li><span class="coming-soon">Future Products</span></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="/about/">About Us</a></li>
+                    <li><span class="coming-soon">Careers</span></li>
+                    <li><a href="/contact/">Contact</a></li>
+                    <li><a href="/investors/">For Investors</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><span class="coming-soon">Documentation</span></li>
+                    <li><span class="coming-soon">API Reference</span></li>
+                    <li><span class="coming-soon">Tutorials</span></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <div class="contact-info">
+                    <p><a href="mailto:info@kesslr.com">info@kesslr.com</a></p><br>
+                </div>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/company/kesslr-labs" class="social-link">LinkedIn</a>
+                    <a href="https://x.com/kesslrlabs" class="social-link">Twitter</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2025 Kesslr Labs Pty Ltd. All rights reserved. | ABN: 691 242 369</p>
+                <div class="footer-links"><a href="/privacy/">Privacy Policy</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="/assets/js/particle-system.js"></script>
+    <script>
+        // Initialize particle system
+        let particleSystem;
+        
+        window.addEventListener('load', function() {
+            try {
+                particleSystem = new GalacticParticleSystem();
+            } catch (error) {
+                console.log('Particle system not available:', error);
+            }
+        });
+        // Progress bar
+        (function(){
+            const pb = document.createElement('div');
+            pb.className = 'progress-bar';
+            document.body.appendChild(pb);
+            window.addEventListener('scroll', () => {
+                const h = document.documentElement;
+                const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+                pb.style.width = (scrolled * 100) + '%';
+            });
+        })();
+    </script>
+</body>
+</html>
