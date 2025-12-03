@@ -34,7 +34,10 @@ const App: React.FC = () => {
           backgroundSize: '100% auto',
           backgroundRepeat: 'repeat-y',
           backgroundPosition: `center ${scrollY * -0.1}px`,
-          zIndex: 0
+          zIndex: 0,
+          willChange: 'background-position',
+          backfaceVisibility: 'hidden',
+          transform: 'translateZ(0)'
         }}
       ></div>
       <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />

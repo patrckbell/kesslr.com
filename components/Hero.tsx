@@ -16,13 +16,28 @@ const Hero: React.FC<HeroProps> = ({ scrollY }) => {
   const asteroidInitialX = -1500; // Initial X position (off-screen left)
   const asteroidInitialY = -2000; // Initial Y position (adjust this to change crash-in angle)
   
-  // Track asteroid's animated X position
+  // Track asteroid's animated X and Y positions
   const asteroidX = useMotionValue(asteroidInitialX); // Start at initial position
+  const asteroidY = useMotionValue(asteroidInitialY); // Start at initial position
   
-  // Reset motion value when component mounts to ensure animation starts from correct position
+  // State to control when animation should start (after initialization)
+  const [isInitialized, setIsInitialized] = useState(false);
+  
+  // Reset motion values when component mounts to ensure animation starts from correct position
   useEffect(() => {
+    // Set initial positions immediately
     asteroidX.set(asteroidInitialX);
-  }, [asteroidX]);
+    asteroidY.set(asteroidInitialY);
+    
+    // Small delay to ensure DOM is ready and positions are set before animation starts
+    const timer = setTimeout(() => {
+      asteroidX.set(asteroidInitialX);
+      asteroidY.set(asteroidInitialY);
+      setIsInitialized(true);
+    }, 50); // Small delay to ensure everything is initialized
+    
+    return () => clearTimeout(timer);
+  }, [asteroidX, asteroidY, asteroidInitialX, asteroidInitialY]);
   
   // No scroll parallax - asteroid stays in place with bounce animation
   
@@ -87,19 +102,22 @@ const Hero: React.FC<HeroProps> = ({ scrollY }) => {
           style={{
             left: '0px',
             zIndex: 2,
-            x: asteroidX
-          }}
-          initial={{ 
-            x: asteroidInitialX, 
-            y: asteroidInitialY,
+            x: asteroidX,
+            y: asteroidY,
             scale: 0.3,
             opacity: 0
           }}
-          animate={{ 
+          initial={false}
+          animate={isInitialized ? { 
             x: asteroidBaseX,
             y: `calc(-50% + ${asteroidBaseY}px)`,
             scale: 0.9,
             opacity: 1
+          } : {
+            x: asteroidInitialX,
+            y: asteroidInitialY,
+            scale: 0.3,
+            opacity: 0
           }}
           transition={{ 
             type: "spring",
@@ -112,12 +130,16 @@ const Hero: React.FC<HeroProps> = ({ scrollY }) => {
             if (typeof latest.x === 'number') {
               asteroidX.set(latest.x);
             }
+            if (typeof latest.y === 'number') {
+              asteroidY.set(latest.y);
+            }
           }}
         >
           <img 
             src="/images/asteroid_hero.png" 
             alt="Asteroid"
             className="max-w-full h-auto object-contain"
+            loading="eager"
             style={{
               filter: 'drop-shadow(0 0 30px rgba(0, 0, 0, 0.5)) brightness(30%)'
             }}

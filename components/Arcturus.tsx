@@ -412,13 +412,15 @@ const Arcturus: React.FC = () => {
             <a
               href="/resources/Arcturus_Investor_Whitepaper.pdf"
               download="Arcturus_Investor_Whitepaper.pdf"
-              className="absolute pointer-events-auto text-white cursor-pointer transition-opacity select-none text-center no-underline"
+              className="absolute text-white cursor-pointer transition-opacity select-none text-center no-underline"
               style={{ 
                 right: '100%',
                 top: '78.1%',
                 transform: 'translateY(-50%)',
                 paddingRight: '20px',
-                opacity: hoveredElement === 'white-circle-1' ? 1 : 0.3,
+                opacity: hoveredElement === 'white-circle-1' ? 1 : 0,
+                pointerEvents: hoveredElement === 'white-circle-1' ? 'auto' : 'none',
+                visibility: hoveredElement === 'white-circle-1' ? 'visible' : 'hidden',
                 fontFamily: "'IBM Plex Sans', sans-serif",
                 fontSize: '20px',
                 whiteSpace: 'nowrap'
@@ -433,13 +435,15 @@ const Arcturus: React.FC = () => {
               href="https://www.notion.so/Arcturus-Supporting-Evidence-2910a10ed172806f8d1cc5d7c8591ada?source=copy_link"
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute pointer-events-auto text-white cursor-pointer transition-opacity select-none text-center no-underline"
+              className="absolute text-white cursor-pointer transition-opacity select-none text-center no-underline"
               style={{ 
                 right: '100%',
                 top: '22.1%',
                 transform: 'translateY(-50%)',
                 paddingRight: '20px',
-                opacity: hoveredElement === 'white-circle-2' ? 1 : 0.3,
+                opacity: hoveredElement === 'white-circle-2' ? 1 : 0,
+                pointerEvents: hoveredElement === 'white-circle-2' ? 'auto' : 'none',
+                visibility: hoveredElement === 'white-circle-2' ? 'visible' : 'hidden',
                 fontFamily: "'IBM Plex Sans', sans-serif",
                 fontSize: '20px',
                 whiteSpace: 'nowrap'
@@ -451,13 +455,15 @@ const Arcturus: React.FC = () => {
             </a>
             
             <div 
-              className="absolute pointer-events-auto text-white cursor-pointer transition-opacity select-none text-center"
+              className="absolute text-white cursor-pointer transition-opacity select-none text-center"
               style={{ 
                 left: '100%',
                 top: '22.1%',
                 transform: 'translateY(-50%)',
                 paddingLeft: '5px',
-                opacity: hoveredElement === 'white-circle-3' ? 0.4 : 0.3,
+                opacity: hoveredElement === 'white-circle-3' ? 0.4 : 0,
+                pointerEvents: hoveredElement === 'white-circle-3' ? 'auto' : 'none',
+                visibility: hoveredElement === 'white-circle-3' ? 'visible' : 'hidden',
                 fontFamily: "'IBM Plex Sans', sans-serif",
                 fontSize: '20px',
                 whiteSpace: 'nowrap'
@@ -471,13 +477,15 @@ const Arcturus: React.FC = () => {
             <a
               href="/resources/Arcturus_EOI.pdf"
               download="Arcturus_EOI.pdf"
-              className="absolute pointer-events-auto text-white cursor-pointer transition-opacity select-none text-center no-underline"
+              className="absolute text-white cursor-pointer transition-opacity select-none text-center no-underline"
               style={{ 
                 left: '100%',
                 top: '67.5%',
                 transform: 'translateY(-50%)',
                 paddingLeft: '20px',
-                opacity: hoveredElement === 'white-circle-4' ? 1 : 0.3,
+                opacity: hoveredElement === 'white-circle-4' ? 1 : 0,
+                pointerEvents: hoveredElement === 'white-circle-4' ? 'auto' : 'none',
+                visibility: hoveredElement === 'white-circle-4' ? 'visible' : 'hidden',
                 fontFamily: "'IBM Plex Sans', sans-serif",
                 fontSize: '20px',
                 whiteSpace: 'nowrap'
