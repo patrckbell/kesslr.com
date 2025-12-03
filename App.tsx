@@ -14,6 +14,35 @@ import Privacy from './components/Privacy';
 const App: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
   const [currentPage, setCurrentPage] = useState<'home' | 'contact' | 'investors' | 'privacy'>('home');
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Preload critical images before showing content
+  useEffect(() => {
+    const preloadImages = async () => {
+      const imageUrls = [
+        '/images/asteroids.png',
+        '/images/asteroid_hero.png'
+      ];
+
+      const loadPromises = imageUrls.map((url) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = resolve;
+          img.onerror = resolve; // Resolve even on error to not block the page
+          img.src = url;
+        });
+      });
+
+      await Promise.all(loadPromises);
+      
+      // Small additional delay to ensure everything is ready
+      setTimeout(() => {
+        setIsLoaded(true);
+      }, 100);
+    };
+
+    preloadImages();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +52,15 @@ const App: React.FC = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Show loading state until images are loaded
+  if (!isLoaded) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-gray-500">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden selection:bg-cyan-500 selection:text-black relative">

@@ -29,12 +29,13 @@ const Hero: React.FC<HeroProps> = ({ scrollY }) => {
     asteroidX.set(asteroidInitialX);
     asteroidY.set(asteroidInitialY);
     
+    // Since App.tsx now waits for images to load, we can start animation immediately
     // Small delay to ensure DOM is ready and positions are set before animation starts
     const timer = setTimeout(() => {
       asteroidX.set(asteroidInitialX);
       asteroidY.set(asteroidInitialY);
       setIsInitialized(true);
-    }, 50); // Small delay to ensure everything is initialized
+    }, 100); // Small delay to ensure everything is initialized
     
     return () => clearTimeout(timer);
   }, [asteroidX, asteroidY, asteroidInitialX, asteroidInitialY]);
