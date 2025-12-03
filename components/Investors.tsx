@@ -116,7 +116,7 @@ const Investors: React.FC<InvestorsProps> = ({ scrollY }) => {
           }}
         >
           <img 
-            src="images/asteroid_hero.png" 
+            src="/images/asteroid_hero.png" 
             alt="Asteroid"
             className="max-w-full h-auto object-contain"
             style={{
@@ -178,14 +178,14 @@ const Investors: React.FC<InvestorsProps> = ({ scrollY }) => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a 
-              href="resources/Kesslr_Labs_Deck.pdf" 
+              href="/resources/Kesslr_Labs_Deck.pdf" 
               download="Kesslr_Labs_Deck.pdf"
               className="border border-cyan-800 text-cyan-500 text-[12px] uppercase font-nippo px-8 py-4 hover:bg-cyan-900/20 transition-colors"
             >
               Download Slide Deck
             </a>
             <a 
-              href="resources/Kesslr_Labs_One_Pager.pdf" 
+              href="/resources/Kesslr_Labs_One_Pager.pdf" 
               download="Kesslr_Labs_One_Pager.pdf"
               className="border border-cyan-800 text-cyan-500 text-[12px] uppercase font-nippo px-8 py-4 hover:bg-cyan-900/20 transition-colors"
             >

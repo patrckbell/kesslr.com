@@ -200,7 +200,7 @@ const DocCard: React.FC<DocCardProps> = ({ label, filename, rotate, x, y, z, ind
         className="w-16"
       >
         <img 
-          src={`images/docs/${filename}`} 
+          src={`/images/docs/${filename}`} 
           alt={label}
           className={`w-full h-auto drop-shadow-2xl ${isSelected || hovered ? 'brightness-110' : 'brightness-90'} transition-all`}
         />

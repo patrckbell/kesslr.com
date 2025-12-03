@@ -115,7 +115,7 @@ const Hero: React.FC<HeroProps> = ({ scrollY }) => {
           }}
         >
           <img 
-            src="images/asteroid_hero.png" 
+            src="/images/asteroid_hero.png" 
             alt="Asteroid"
             className="max-w-full h-auto object-contain"
             style={{

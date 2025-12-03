@@ -410,7 +410,7 @@ const Arcturus: React.FC = () => {
           {/* Text labels positioned absolutely relative to SVG */}
           <div className="absolute inset-0 pointer-events-none" style={{ width: '100%', height: '100%' }}>
             <a
-              href="resources/Arcturus_Investor_Whitepaper.pdf"
+              href="/resources/Arcturus_Investor_Whitepaper.pdf"
               download="Arcturus_Investor_Whitepaper.pdf"
               className="absolute pointer-events-auto text-white cursor-pointer transition-opacity select-none text-center no-underline"
               style={{ 
@@ -469,7 +469,7 @@ const Arcturus: React.FC = () => {
             </div>
             
             <a
-              href="resources/Arcturus_EOI.pdf"
+              href="/resources/Arcturus_EOI.pdf"
               download="Arcturus_EOI.pdf"
               className="absolute pointer-events-auto text-white cursor-pointer transition-opacity select-none text-center no-underline"
               style={{ 

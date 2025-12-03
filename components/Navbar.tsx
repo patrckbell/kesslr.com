@@ -20,7 +20,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) => {
         <div className="flex items-center gap-8">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <img src="images/logo.png" alt="Kesslr Labs" className="w-8 h-8 object-contain" />
+            <img src="/images/logo.png" alt="Kesslr Labs" className="w-8 h-8 object-contain" />
             <span className="font-regular tracking-[0.2em] text-sm text-white font-nippo">KESSLR LABS</span>
           </div>
           

@@ -11,7 +11,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
       <div className="w-full flex justify-between items-end text-[10px] text-gray-600 pt-6">
         <div className="flex flex-col gap-2">
              <div className="flex items-center gap-2 mb-1">
-                <img src="./images/logo.png" alt="Kesslr Labs" className="w-4 h-4 object-contain opacity-50" />
+                <img src="/images/logo.png" alt="Kesslr Labs" className="w-4 h-4 object-contain opacity-50" />
                 <span className="font-bold tracking-widest text-gray-500">KESSLR LABS</span>
                 <div className="flex items-center gap-3 ml-4">
                   <a href="https://x.com/kesslrlabs" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">

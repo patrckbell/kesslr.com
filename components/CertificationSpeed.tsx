@@ -37,7 +37,7 @@ const CertificationSpeed: React.FC = () => {
         {/* Right SVG Diagram */}
         <div className="flex items-center justify-center lg:pl-12">
           <img 
-            src="images/cert_speed.svg" 
+            src="/images/cert_speed.svg" 
             alt="Certification Speed Diagram"
             className="w-full h-auto max-w-full object-contain"
           />

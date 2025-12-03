@@ -30,7 +30,7 @@ const App: React.FC = () => {
       <div 
         className="fixed inset-0 pointer-events-none"
         style={{
-          backgroundImage: 'url(images/asteroids.png)',
+          backgroundImage: 'url(/images/asteroids.png)',
           backgroundSize: '100% auto',
           backgroundRepeat: 'repeat-y',
           backgroundPosition: `center ${scrollY * -0.1}px`,

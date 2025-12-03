@@ -83,7 +83,7 @@ const WhyNow: React.FC = () => {
           <div className="absolute -bottom-[1px] -right-[1px] w-2 h-2 border-b border-r border-white z-10"></div>
           
           {/* Graph section - full width, background to top */}
-          <div className={`w-full ${graphHeight} relative`} style={{ backgroundImage: 'url(images/graph_bg.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+          <div className={`w-full ${graphHeight} relative`} style={{ backgroundImage: 'url(/images/graph_bg.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
             <div className="w-full h-full flex items-end justify-center gap-2 px-6 py-4">
               {barData.map((bar, index) => (
                 <motion.div
@@ -246,7 +246,7 @@ const WhyNow: React.FC = () => {
           <div className="absolute -bottom-[1px] -right-[1px] w-2 h-2 border-b border-r border-white z-10"></div>
 
           {/* Graph section - full width, background to top */}
-          <div className={`w-full ${graphHeight} relative`} style={{ backgroundImage: 'url(images/graph_bg.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+          <div className={`w-full ${graphHeight} relative`} style={{ backgroundImage: 'url(/images/graph_bg.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
             <div className="w-full h-full px-6 py-4">
               <svg viewBox="0 0 100 100" className="w-full h-full" preserveAspectRatio="none">
               {/* Axes with arrows - inset from edges */}
