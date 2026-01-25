@@ -96,10 +96,10 @@ const Investors: React.FC<InvestorsProps> = ({ scrollY }) => {
     <>
     <section className="w-full h-screen flex items-center relative pt-20 overflow-hidden">
       {/* Container with max-width matching other sections */}
-      <div className="w-full max-w-7xl mx-auto px-12 md:px-24 h-full relative">
-        {/* Asteroid on the left - absolute positioning with crash-in animation */}
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-12 md:px-24 h-full relative">
+        {/* Asteroid on the left - absolute positioning with crash-in animation - hidden on mobile */}
         <motion.div 
-          className="absolute top-1/2"
+          className="absolute top-1/2 hidden md:block"
           style={{
             left: '0px',
             zIndex: 2,
@@ -148,16 +148,15 @@ const Investors: React.FC<InvestorsProps> = ({ scrollY }) => {
           />
         </motion.div>
 
-        {/* Text positioned at 2/3 of the way (right 1/3) - absolute positioning */}
+        {/* Text - responsive positioning */}
         <div 
-          className="absolute top-1/2 -translate-y-1/2 flex flex-col items-end justify-center"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:left-auto md:translate-x-0 md:right-[520px] flex flex-col items-center md:items-end justify-center w-full md:w-auto"
           style={{
-            right: '520px', // Right margin (matching left)
             zIndex: 1
           }}
         >
         <h1 
-          className="text-[140px] font-semibold tracking-tighter leading-none text-left"
+          className="text-6xl sm:text-8xl md:text-[140px] font-semibold tracking-tighter leading-none text-center md:text-left"
           style={{
             backgroundImage: gradientIntensityValue > 0 
               ? `linear-gradient(to left, rgba(${Math.round(100 * 1/gradientIntensityValue)}, ${Math.round(100 * 1/gradientIntensityValue)}, ${Math.round(100 * 1/gradientIntensityValue)}, ${0.8 * 1/gradientIntensityValue}) 0%, rgba(255, 255, 255, 1) 100%)`
@@ -184,7 +183,7 @@ const Investors: React.FC<InvestorsProps> = ({ scrollY }) => {
       </div>
     </section>
       {/* Under Construction Section */}
-    <section className="w-full min-h-screen max-w-7xl mx-auto px-12 md:px-24 py-32 relative flex items-center">
+    <section className="w-full min-h-screen max-w-7xl mx-auto px-4 sm:px-12 md:px-24 py-16 sm:py-32 relative flex items-center">
         {/* Gradient border */}
         <div 
           className="absolute top-0 left-0 right-0 h-px"
@@ -194,23 +193,23 @@ const Investors: React.FC<InvestorsProps> = ({ scrollY }) => {
         ></div>
         
         <div className="w-full max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-semibold mb-6">Investor Resources</h2>
-          <p className="text-gray-400 text-[14px] mb-12" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 300 }}>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 sm:mb-6">Investor Resources</h2>
+          <p className="text-gray-400 text-xs sm:text-sm mb-8 sm:mb-12 px-4" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 300 }}>
             Our investor page is currently under construction. In the meantime, please download our materials or book a meeting with our team.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4">
             <a 
               href="/resources/Kesslr_Labs_Deck.pdf" 
               download="Kesslr_Labs_Deck.pdf"
-              className="border border-cyan-800 text-cyan-500 text-[12px] uppercase font-nippo px-8 py-4 hover:bg-cyan-900/20 transition-colors"
+              className="w-full sm:w-auto border border-cyan-800 text-cyan-500 text-[12px] uppercase font-nippo px-6 sm:px-8 py-3 sm:py-4 hover:bg-cyan-900/20 transition-colors text-center"
             >
               Download Slide Deck
             </a>
             <a 
               href="/resources/Kesslr_Labs_One_Pager.pdf" 
               download="Kesslr_Labs_One_Pager.pdf"
-              className="border border-cyan-800 text-cyan-500 text-[12px] uppercase font-nippo px-8 py-4 hover:bg-cyan-900/20 transition-colors"
+              className="w-full sm:w-auto border border-cyan-800 text-cyan-500 text-[12px] uppercase font-nippo px-6 sm:px-8 py-3 sm:py-4 hover:bg-cyan-900/20 transition-colors text-center"
             >
               Download One Pager
             </a>
@@ -218,7 +217,7 @@ const Investors: React.FC<InvestorsProps> = ({ scrollY }) => {
               href="https://cal.com/kesslr" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="bg-gray-200 text-black text-[12px] uppercase font-nippo px-8 py-4 hover:bg-white transition-colors"
+              className="w-full sm:w-auto bg-gray-200 text-black text-[12px] uppercase font-nippo px-6 sm:px-8 py-3 sm:py-4 hover:bg-white transition-colors text-center"
             >
               Book a Meeting
             </a>

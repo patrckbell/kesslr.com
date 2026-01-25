@@ -7,13 +7,13 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
   return (
-    <footer className="w-full max-w-7xl mx-auto px-12 md:px-24 pb-12 pt-0 flex flex-col items-center relative border-t border-white/10">
-      <div className="w-full flex justify-between items-end text-[10px] text-gray-600 pt-6">
+    <footer className="w-full max-w-7xl mx-auto px-4 sm:px-12 md:px-24 pb-8 sm:pb-12 pt-0 flex flex-col items-center relative border-t border-white/10">
+      <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-end text-[10px] text-gray-600 pt-6 gap-4 sm:gap-0">
         <div className="flex flex-col gap-2">
-             <div className="flex items-center gap-2 mb-1">
+             <div className="flex flex-wrap items-center gap-2 mb-1">
                 <img src="/images/logo.png" alt="Kesslr Labs" className="w-4 h-4 object-contain opacity-50" />
                 <span className="font-bold tracking-widest text-gray-500">KESSLR LABS</span>
-                <div className="flex items-center gap-3 ml-4">
+                <div className="flex items-center gap-3 ml-0 sm:ml-4">
                   <a href="https://x.com/kesslrlabs" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-500">
                       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/>

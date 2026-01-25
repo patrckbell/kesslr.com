@@ -2,7 +2,7 @@ import React from 'react';
 
 const Privacy: React.FC = () => {
   return (
-    <section className="w-full min-h-screen max-w-7xl mx-auto px-12 md:px-24 py-32 relative">
+    <section className="w-full min-h-screen max-w-7xl mx-auto px-4 sm:px-12 md:px-24 py-16 sm:py-32 relative">
       {/* Gradient border */}
       <div 
         className="absolute top-0 left-0 right-0 h-px"
@@ -12,9 +12,9 @@ const Privacy: React.FC = () => {
       ></div>
       
       <div className="w-full max-w-4xl mx-auto">
-        <h1 className="text-5xl font-semibold mb-8">Privacy Policy</h1>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-6 sm:mb-8">Privacy Policy</h1>
         
-        <div className="bg-[#0E0E0E] border border-[#2E2E2E] p-8 space-y-6">
+        <div className="bg-[#0E0E0E] border border-[#2E2E2E] p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
           <p><strong>Effective Date:</strong> October 2025</p>
           <p style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 300, lineHeight: '1.6' }}>
             Kesslr Labs Pty Ltd ("Kesslr Labs," "we," "our," or "us") respects your privacy. This Privacy Policy explains how we collect, use, and protect your information when you use our website and services.

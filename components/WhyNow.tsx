@@ -5,8 +5,8 @@ const WhyNow: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  // Global graph height (adjustable)
-  const graphHeight = 'h-60'; // Options: 'aspect-square', 'h-40', 'h-48', 'h-56', etc.
+  // Global graph height (adjustable) - smaller on mobile
+  const graphHeight = 'h-52 sm:h-48 md:h-60'; // Taller on mobile, normal on larger screens
   
   // Wrapper box dimensions (adjustable)
   const wrapperMaxWidth = 'max-w-[800px]'; // Options: 'max-w-4xl', 'max-w-6xl', 'max-w-[1200px]', etc.
@@ -61,7 +61,7 @@ const WhyNow: React.FC = () => {
   }).join(' ');
 
   return (
-    <section ref={sectionRef} className="w-full h-screen max-w-7xl mx-auto px-12 md:px-24 py-12 relative flex flex-col justify-center">
+    <section ref={sectionRef} className="w-full min-h-screen max-w-7xl mx-auto px-4 sm:px-12 md:px-24 py-8 sm:py-12 relative flex flex-col justify-center">
       {/* Gradient border */}
       <div 
         className="absolute top-0 left-0 right-0 h-px"
@@ -69,11 +69,11 @@ const WhyNow: React.FC = () => {
           background: 'linear-gradient(to right, transparent 0%, rgba(176, 176, 176, 0.1) 33%, rgba(176, 176, 176, 0.1) 66%, transparent 100%)'
         }}
       ></div>
-      <div className="mb-8 text-center">
-        <h2 className="text-5xl font-semibold">Why Now?</h2>
+      <div className="mb-6 sm:mb-8 text-center">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold">Why Now?</h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 max-w-[90%] mx-auto p-2 bg-[#0E0E0E] border border-[#2E2E2E]">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 max-w-[85%] sm:max-w-full md:max-w-[90%] mx-auto p-2 bg-[#0E0E0E] border border-[#2E2E2E]">
         {/* Chart 1 - Bar Graph */}
         <div className="border border-white/10 flex flex-col bg-[#121212] relative">
           {/* Corner brackets */}
@@ -84,7 +84,7 @@ const WhyNow: React.FC = () => {
           
           {/* Graph section - full width, background to top */}
           <div className={`w-full ${graphHeight} relative`} style={{ backgroundImage: 'url(/images/graph_bg.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
-            <div className="w-full h-full flex items-end justify-center gap-2 px-6 py-4">
+            <div className="w-full h-full flex items-end justify-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-3 sm:py-4">
               {barData.map((bar, index) => (
                 <motion.div
                   key={index}
@@ -116,16 +116,16 @@ const WhyNow: React.FC = () => {
           </div>
           
           {/* Text section */}
-          <div className="p-4">
+          <div className="p-3 sm:p-4">
             {/* Header */}
-            <h3 className="text-xl text-white mb-3 text-center" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>Demand for<br />Rapid Iteration</h3>
+            <h3 className="text-lg sm:text-xl text-white mb-2 sm:mb-3 text-center" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>Demand for<br />Rapid Iteration</h3>
             
             {/* Separator line between header and bullet points */}
-            <div className="relative border-t border-white/10 mb-3">
+            <div className="relative border-t border-white/10 mb-2 sm:mb-3">
             </div>
             
             {/* Bullet points */}
-            <ul className="text-[13px] text-white space-y-2 w-[85%] mx-auto">
+            <ul className="text-xs sm:text-[13px] text-white space-y-1.5 sm:space-y-2 w-[85%] mx-auto">
             <li className="flex items-start">
               <span className="mr-2">•</span>
               <span>Modern teams require in-loop evidence generation to keep development velocity high.</span>
@@ -152,9 +152,9 @@ const WhyNow: React.FC = () => {
 
           {/* Graph section - full width, background to top */}
           <div className={`w-full ${graphHeight} relative overflow-hidden`} style={{ backgroundImage: 'url(images/graph_bg.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
-            <div className="w-full h-full flex flex-col justify-center gap-3 px-6 py-4 relative z-0">
+            <div className="w-full h-full flex flex-col justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 relative z-0">
             {/* Horizontal arrow pointing right - inset from edges */}
-            <div className="absolute bottom-4 left-6 right-6 h-px bg-[#999999]">
+            <div className="absolute bottom-3 sm:bottom-4 left-4 sm:left-6 right-4 sm:right-6 h-px bg-[#999999]">
               <motion.div
                 className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-l-[8px] border-l-[#999999] border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent"
                 initial={{ opacity: 0 }}
@@ -211,16 +211,16 @@ const WhyNow: React.FC = () => {
           </div>
           
           {/* Text section */}
-          <div className="p-4">
+          <div className="p-3 sm:p-4">
             {/* Header */}
-            <h3 className="text-xl text-white mb-3 text-center" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>Certification is<br />the Bottleneck</h3>
+            <h3 className="text-lg sm:text-xl text-white mb-2 sm:mb-3 text-center" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>Certification is<br />the Bottleneck</h3>
             
             {/* Separator line between header and bullet points */}
-            <div className="relative border-t border-white/10 mb-3">
+            <div className="relative border-t border-white/10 mb-2 sm:mb-3">
             </div>
             
             {/* Bullet points */}
-            <ul className="text-[13px] text-white space-y-2 w-[85%] mx-auto">
+            <ul className="text-xs sm:text-[13px] text-white space-y-1.5 sm:space-y-2 w-[85%] mx-auto">
             <li className="flex items-start">
               <span className="mr-2">•</span>
               <span>Legacy certification tools can't keep pace with modern system scale and verification depth.</span>
@@ -247,7 +247,7 @@ const WhyNow: React.FC = () => {
 
           {/* Graph section - full width, background to top */}
           <div className={`w-full ${graphHeight} relative`} style={{ backgroundImage: 'url(/images/graph_bg.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
-            <div className="w-full h-full px-6 py-4">
+            <div className="w-full h-full px-4 sm:px-6 py-3 sm:py-4">
               <svg viewBox="0 0 100 100" className="w-full h-full" preserveAspectRatio="none">
               {/* Axes with arrows - inset from edges */}
               <line x1="8" y1="95" x2="88" y2="95" stroke="#999999" strokeWidth="0.5" opacity="1" />
@@ -325,16 +325,16 @@ const WhyNow: React.FC = () => {
           </div>
           
           {/* Text section */}
-          <div className="p-4">
+          <div className="p-3 sm:p-4">
             {/* Header */}
-            <h3 className="text-xl text-white mb-3 text-center" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>Complexity is<br />Growing</h3>
+            <h3 className="text-lg sm:text-xl text-white mb-2 sm:mb-3 text-center" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 500 }}>Complexity is<br />Growing</h3>
             
             {/* Separator line between header and bullet points */}
-            <div className="relative border-t border-white/10 mb-3">
+            <div className="relative border-t border-white/10 mb-2 sm:mb-3">
             </div>
             
             {/* Bullet points */}
-            <ul className="text-[13px] text-white space-y-2 w-[85%] mx-auto">
+            <ul className="text-xs sm:text-[13px] text-white space-y-1.5 sm:space-y-2 w-[85%] mx-auto">
             <li className="flex items-start">
               <span className="mr-2">•</span>
               <span>New autonomy workloads demand assurance levels that exceed current team capacity.</span>

@@ -24,7 +24,7 @@ const CertificationSucks: React.FC = () => {
   ];
 
   return (
-    <section className="w-full h-screen max-w-7xl mx-auto px-12 md:px-24 py-24 relative flex items-center">
+    <section className="w-full min-h-screen max-w-7xl mx-auto px-4 sm:px-12 md:px-24 py-16 sm:py-24 relative flex items-center">
       {/* Gradient border */}
       <div 
         className="absolute top-0 left-0 right-0 h-px"
@@ -32,11 +32,11 @@ const CertificationSucks: React.FC = () => {
           background: 'linear-gradient(to right, transparent 0%, rgba(176, 176, 176, 0.1) 33%, rgba(176, 176, 176, 0.1) 66%, transparent 100%)'
         }}
       ></div>
-      <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-24">
         
         {/* Left Side: Stats */}
         <div>
-          <h2 className="text-[50px] md:text-[50px] font-semibold mb-2">
+          <h2 className="text-3xl sm:text-4xl md:text-[50px] font-semibold mb-3 sm:mb-2">
             Certification <span className="font-bold">Sucks.</span>
           </h2>
           <div className="space-y-2 p-2 bg-[#0E0E0E] border border-[#2E2E2E]">
@@ -53,13 +53,13 @@ const CertificationSucks: React.FC = () => {
             ))}
           </div>
 
-          <p className="text-[14px] text-gray-500 mt-4">
+          <p className="text-xs sm:text-sm text-gray-500 mt-4">
             Fragmented systems, endless testing, <span className="text-900 text-[#D90000]">billions in overruns.</span>
           </p>
         </div>
 
-        {/* Right Side: Document Pile Visual */}
-        <div className="relative h-[500px] flex flex-col items-center justify-center">
+        {/* Right Side: Document Pile Visual - Hidden on mobile */}
+        <div className="hidden lg:flex relative h-[400px] sm:h-[500px] flex-col items-center justify-center mt-8 lg:mt-0">
            <DocumentPile />
         </div>
 
@@ -98,7 +98,7 @@ const DocumentPile: React.FC = () => {
 
   return (
     <div className="relative flex flex-col items-center">
-      <div className="relative w-[200px] h-[200px] flex items-center justify-center">
+      <div className="relative w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] flex items-center justify-center">
           {docs.map((doc, idx) => (
            <DocCard 
              key={idx} 
@@ -117,7 +117,7 @@ const DocumentPile: React.FC = () => {
            />
          ))}
       </div>
-      <p className="absolute top-[330px] text-[14px] text-gray-600 text-center whitespace-nowrap transition-all duration-300">
+      <p className="absolute top-[250px] sm:top-[330px] text-xs sm:text-sm text-gray-600 text-center px-4 transition-all duration-300">
         {selectedDescription || "Click on a document to learn more"}
       </p>
     </div>
@@ -170,12 +170,10 @@ const DocCard: React.FC<DocCardProps> = ({ label, filename, rotate, x, y, z, ind
         transform: isSelected 
           ? `translate(calc(0px), calc(0px))`
           : `translate(calc(${x}px), calc(${y}px))`,
-        width: '10rem',
-        height: '10rem',
         zIndex: isSelected ? 50 : (hovered ? 40 : z),
         pointerEvents: 'auto',
       }}
-      className="transition-all duration-300 ease-out cursor-pointer"
+      className="transition-all duration-300 ease-out cursor-pointer w-[7.5rem] h-[7.5rem] sm:w-[10rem] sm:h-[10rem]"
     >
       {/* Invisible hover area that stays in original position */}
       <div

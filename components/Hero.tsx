@@ -96,10 +96,10 @@ const Hero: React.FC<HeroProps> = ({ scrollY }) => {
   return (
     <section className="w-full h-screen flex items-center relative pt-20 overflow-hidden">
       {/* Container with max-width matching other sections */}
-      <div className="w-full max-w-7xl mx-auto px-12 md:px-24 h-full relative">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-12 md:px-24 h-full relative">
         {/* Asteroid on the left - absolute positioning with crash-in animation */}
         <motion.div 
-          className="absolute top-1/2"
+          className="absolute top-1/2 hidden md:block"
           style={{
             left: '0px',
             zIndex: 2,
@@ -147,16 +147,15 @@ const Hero: React.FC<HeroProps> = ({ scrollY }) => {
           />
         </motion.div>
 
-        {/* Text positioned at 2/3 of the way (right 1/3) - absolute positioning */}
+        {/* Text - responsive positioning */}
         <div 
-          className="absolute top-1/2 -translate-y-1/2 flex flex-col items-end justify-center"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:left-auto md:translate-x-0 md:right-[100px] flex flex-col items-center md:items-end justify-center w-full md:w-auto"
           style={{
-            right: '100px', // Right margin (matching left)
             zIndex: 1
           }}
         >
         <h1 
-          className="text-[140px] font-semibold tracking-tighter leading-none text-center"
+          className="text-6xl sm:text-8xl md:text-[140px] font-semibold tracking-tighter leading-none text-center md:text-left"
           style={{
             backgroundImage: gradientIntensityValue > 0 
               ? `linear-gradient(to right, rgba(${Math.round(100 * 1/gradientIntensityValue)}, ${Math.round(100 * 1/gradientIntensityValue)}, ${Math.round(100 * 1/gradientIntensityValue)}, ${0.8 * 1/gradientIntensityValue}) 0%, rgba(255, 255, 255, 1) 100%)`

@@ -17,7 +17,7 @@ const Contact: React.FC = () => {
 
 
   return (
-    <section className="w-full min-h-screen max-w-7xl mx-auto px-12 md:px-24 py-32 relative flex items-center">
+    <section className="w-full min-h-screen max-w-7xl mx-auto px-4 sm:px-12 md:px-24 py-16 sm:py-32 relative flex items-center">
       {/* Gradient border */}
       <div 
         className="absolute top-0 left-0 right-0 h-px"
@@ -27,18 +27,18 @@ const Contact: React.FC = () => {
       ></div>
       
       <div className="w-full max-w-2xl mx-auto">
-        <div className="mb-12 text-center">
-          <h1 className="text-5xl font-semibold mb-4">Contact Us</h1>
-          <p className="text-gray-400 text-[14px]" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 300 }}>
+        <div className="mb-8 sm:mb-12 text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-4">Contact Us</h1>
+          <p className="text-gray-400 text-xs sm:text-sm" style={{ fontFamily: "'IBM Plex Sans', sans-serif", fontWeight: 300 }}>
             Get in touch with our team to learn more about Arcturus and how we can help accelerate your certification process.
           </p>
         </div>
 
-        <div className="p-6 bg-[#0E0E0E] border border-[#2E2E2E]">
+        <div className="p-4 sm:p-6 bg-[#0E0E0E] border border-[#2E2E2E]">
           <form 
             action="https://formspree.io/f/xjkawlev" 
             method="POST" 
-            className="space-y-6"
+            className="space-y-4 sm:space-y-6"
           >
             <div>
               <label htmlFor="name" className="block text-sm text-gray-400 mb-2" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
