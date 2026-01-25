@@ -122,6 +122,7 @@ We are starting in the space industry (satellites, launch vehicles, and supporti
         'Salary range: $70k-$120k AUD + equity options (dependent on experience)'
       ],
       howToApply: 'Please apply through this Google Form.',
+      applicationLink: 'https://forms.gle/XrW9yfWbpgUzKQth8', // Add your Google Form link here
       equalOpportunity: 'Kesslr Labs is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
     },
     'embedded-software-fulltime': {
@@ -167,6 +168,7 @@ We are starting in the space industry (satellites, launch vehicles, and supporti
         'Salary range: $70k-$120k AUD + equity options (dependent on experience)'
       ],
       howToApply: 'Please apply through this Google Form.',
+      applicationLink: 'https://forms.gle/SDDucL8evUfvLCwF7', // Add your Google Form link here
       equalOpportunity: 'Kesslr Labs is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
     },
     'software-systems': {
@@ -210,6 +212,7 @@ We are starting in the space industry (satellites, launch vehicles, and supporti
         'Salary range: $30-$40 AUD/hr'
       ],
       howToApply: 'Please apply through this Google Form.',
+      applicationLink: 'https://forms.gle/K2c7QQEqFocuGLi1A', // Add your Google Form link here
       equalOpportunity: 'Kesslr Labs is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
     },
     'embedded-software-parttime': {
@@ -253,6 +256,7 @@ We are starting in the space industry (satellites, launch vehicles, and supporti
         'Salary range: $30-$40 AUD/hr'
       ],
       howToApply: 'Please apply through this Google Form.',
+      applicationLink: 'https://forms.gle/RZq6SpFDjfoTMW898', // Add your Google Form link here
       equalOpportunity: 'Kesslr Labs is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
     },
     'ml-systems-engineer': {
@@ -298,6 +302,7 @@ We are starting in the space industry (satellites, launch vehicles, and supporti
         'Salary range: $30-$40 AUD/hr'
       ],
       howToApply: 'Please apply through this Google Form.',
+      applicationLink: 'https://forms.gle/LGQZyHD5AwF5VKbQ8', // Add your Google Form link here
       equalOpportunity: 'Kesslr Labs is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
     },
     'university-capstone': {
@@ -802,7 +807,23 @@ We are starting in the space industry (satellites, launch vehicles, and supporti
                 <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">How to Apply</h3>
                 <div className="text-gray-300 mb-6 sm:mb-8 text-sm sm:text-base" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
                   <p className="leading-relaxed">
-                    {(jobs[selectedJob as keyof typeof jobs] as any).howToApply}
+                    {(jobs[selectedJob as keyof typeof jobs] as any).howToApply.split('this Google Form').map((part: string, index: number, array: string[]) => {
+                      if (index === array.length - 1) return part;
+                      const applicationLink = (jobs[selectedJob as keyof typeof jobs] as any).applicationLink || '#';
+                      return (
+                        <React.Fragment key={index}>
+                          {part}
+                          <a 
+                            href={applicationLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-cyan-500 hover:text-cyan-400 underline transition-colors"
+                          >
+                            this Google Form
+                          </a>
+                        </React.Fragment>
+                      );
+                    })}
                   </p>
                 </div>
               </>
