@@ -119,7 +119,7 @@ We are starting in the space industry (satellites, launch vehicles, and supporti
         'Full-time role',
         'On-site, based out of our Collingwood, Victoria office',
         'Company plans to relocate to the USA within the year; visa and relocation costs will be covered',
-        'Salary range: $70k-$120k AUD + equity options (dependent on experience)'
+        'Salary range: $80k-$120k AUD'
       ],
       howToApply: 'Please apply through this Google Form.',
       applicationLink: 'https://forms.gle/XrW9yfWbpgUzKQth8', // Add your Google Form link here
@@ -165,7 +165,7 @@ We are starting in the space industry (satellites, launch vehicles, and supporti
         'Full-time role',
         'On-site, based out of our Collingwood, Victoria office',
         'Company plans to relocate to the USA within the year; visa and relocation costs will be covered',
-        'Salary range: $70k-$120k AUD + equity options (dependent on experience)'
+        'Salary range: $80k-$120k AUD'
       ],
       howToApply: 'Please apply through this Google Form.',
       applicationLink: 'https://forms.gle/SDDucL8evUfvLCwF7', // Add your Google Form link here
