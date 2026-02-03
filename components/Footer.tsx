@@ -11,8 +11,8 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
       <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-end text-[10px] text-gray-600 pt-6 gap-4 sm:gap-0">
         <div className="flex flex-col gap-2">
              <div className="flex flex-wrap items-center gap-2 mb-1">
-                <img src="/images/logo.png" alt="Kesslr Labs" className="w-4 h-4 object-contain opacity-50" />
-                <span className="font-bold tracking-widest text-gray-500">KESSLR LABS</span>
+                <img src="/images/logo.png" alt="Kronos Space" className="w-4 h-4 object-contain opacity-50" />
+                <span className="font-bold tracking-widest text-gray-500">KRONOS SPACE</span>
                 <div className="flex items-center gap-3 ml-0 sm:ml-4">
                   <a href="https://x.com/kesslrlabs" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-500">

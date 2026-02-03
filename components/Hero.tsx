@@ -9,7 +9,7 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ scrollY }) => {
   // Asteroid final position (adjustable)
-  const asteroidBaseX = -260; // Final X position
+  const asteroidBaseX = -320; // Final X position
   const asteroidBaseY = -30; // Final Y position (centered vertically)
   
   // Asteroid initial position (adjustable for crash-in angle)
@@ -46,7 +46,7 @@ const Hero: React.FC<HeroProps> = ({ scrollY }) => {
   // Text is positioned from right, asteroid from left
   // Container is max-w-7xl (1280px), text at right: 100px means ~1180px from left edge
   // Asteroid at baseX = -220px means it's about 1400px away when fully in position
-  const textPositionX = 1180; // Approximate text X position from left
+  const textPositionX = 1400; // Approximate text X position from left
   
   // Calculate distance (simplified - adjust based on actual layout)
   // Asteroid starts at -800 (far left, off-screen)
@@ -149,7 +149,7 @@ const Hero: React.FC<HeroProps> = ({ scrollY }) => {
 
         {/* Text - responsive positioning */}
         <div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:left-auto md:translate-x-0 md:right-[100px] flex flex-col items-center md:items-end justify-center w-full md:w-auto"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:left-auto md:translate-x-0 md:right-[60px] flex flex-col items-center md:items-end justify-center w-full md:w-auto"
           style={{
             zIndex: 1
           }}
@@ -172,7 +172,7 @@ const Hero: React.FC<HeroProps> = ({ scrollY }) => {
             transition: 'background-image 0.1s ease-out'
           }}
         >
-          KESSLR <br /> LABS
+          KRONOS <br /> SPACE
         </h1>
         </div>
       </div>
