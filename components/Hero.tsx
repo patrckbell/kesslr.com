@@ -172,7 +172,7 @@ const Hero: React.FC<HeroProps> = ({ scrollY }) => {
             transition: 'background-image 0.1s ease-out'
           }}
         >
-          KRONOS <br /> SPACE
+          KRONUS
         </h1>
         </div>
       </div>

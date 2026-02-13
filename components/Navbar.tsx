@@ -28,8 +28,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) => {
         <div className="flex items-center gap-4 sm:gap-8">
           {/* Logo */}
           <div className="flex items-center gap-2 sm:gap-3">
-            <img src="/images/logo.png" alt="Kronos Space" className="w-6 h-6 sm:w-8 sm:h-8 object-contain" />
-            <span className="font-regular tracking-[0.2em] text-xs sm:text-sm text-white font-nippo">KRONOS SPACE</span>
+            <img src="/images/logo.png" alt="Kronus" className="w-6 h-6 sm:w-8 sm:h-8 object-contain" />
+            <span className="font-regular tracking-[0.2em] text-xs sm:text-sm text-white font-nippo">KRONUS</span>
           </div>
           
           {/* Nav Links as Separate Buttons - Desktop */}

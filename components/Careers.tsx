@@ -87,7 +87,7 @@ const Careers: React.FC<CareersProps> = ({ scrollY }) => {
     'fpga-engineer': {
       title: 'Founding FPGA Engineer',
       details: 'Full-time | On-site (Collingwood, VIC)',
-      about: `Kronos Space builds foundational compute infrastructure for systems where correctness is not optional. We work on electronic systems that operate beyond the reach of intervention, where failure is catastrophic, behaviour must be understood in advance, and confidence must be earned, not assumed.
+      about: `Kronus builds foundational compute infrastructure for systems where correctness is not optional. We work on electronic systems that operate beyond the reach of intervention, where failure is catastrophic, behaviour must be understood in advance, and confidence must be earned, not assumed.
 
 Arcturus is our answer to this problem: a compute and development platform designed from the ground up for safety-critical systems. It combines deterministic hardware, constrained software environments, and tightly integrated testing and evidence generation to make system behaviour legible, predictable, and defensible. Rather than treating assurance and certification as downstream processes, Arcturus embeds them directly into how systems are designed, built, and validated.
 
@@ -123,12 +123,12 @@ We are starting in the space industry (satellites, launch vehicles, and supporti
       ],
       howToApply: 'Please apply through this Google Form.',
       applicationLink: 'https://forms.gle/XrW9yfWbpgUzKQth8', // Add your Google Form link here
-      equalOpportunity: 'Kronos Space is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
+      equalOpportunity: 'Kronus is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
     },
     'embedded-software-fulltime': {
       title: 'Founding Software Engineer',
       details: 'Full-time | On-site (Collingwood, VIC)',
-      about: `Kronos Space builds foundational compute infrastructure for systems where correctness is not optional. We work on electronic systems that operate beyond the reach of intervention, where failure is catastrophic, behaviour must be understood in advance, and confidence must be earned, not assumed.
+      about: `Kronus builds foundational compute infrastructure for systems where correctness is not optional. We work on electronic systems that operate beyond the reach of intervention, where failure is catastrophic, behaviour must be understood in advance, and confidence must be earned, not assumed.
 
 Arcturus is our answer to this problem: a compute and development platform designed from the ground up for safety-critical systems. It combines deterministic hardware, constrained software environments, and tightly integrated testing and evidence generation to make system behaviour legible, predictable, and defensible. Rather than treating assurance and certification as downstream processes, Arcturus embeds them directly into how systems are designed, built, and validated.
 
@@ -169,12 +169,12 @@ We are starting in the space industry (satellites, launch vehicles, and supporti
       ],
       howToApply: 'Please apply through this Google Form.',
       applicationLink: 'https://forms.gle/SDDucL8evUfvLCwF7', // Add your Google Form link here
-      equalOpportunity: 'Kronos Space is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
+      equalOpportunity: 'Kronus is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
     },
     'software-systems': {
       title: 'Software Systems Engineer',
       details: 'Part-time | On-site (Collingwood, VIC)',
-      about: `Kronos Space builds foundational compute infrastructure for systems where correctness is not optional. We work on electronic systems that operate beyond the reach of intervention, where failure is catastrophic, behaviour must be understood in advance, and confidence must be earned, not assumed.
+      about: `Kronus builds foundational compute infrastructure for systems where correctness is not optional. We work on electronic systems that operate beyond the reach of intervention, where failure is catastrophic, behaviour must be understood in advance, and confidence must be earned, not assumed.
 
 Arcturus is our answer to this problem: a compute and development platform designed from the ground up for safety-critical systems. It combines deterministic hardware, constrained software environments, and tightly integrated testing and evidence generation to make system behaviour legible, predictable, and defensible. Rather than treating assurance and certification as downstream processes, Arcturus embeds them directly into how systems are designed, built, and validated.
 
@@ -213,12 +213,12 @@ We are starting in the space industry (satellites, launch vehicles, and supporti
       ],
       howToApply: 'Please apply through this Google Form.',
       applicationLink: 'https://forms.gle/K2c7QQEqFocuGLi1A', // Add your Google Form link here
-      equalOpportunity: 'Kronos Space is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
+      equalOpportunity: 'Kronus is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
     },
     'embedded-software-parttime': {
       title: 'Embedded Software Engineer',
       details: 'Part-time | On-site (Collingwood, VIC)',
-      about: `Kronos Space builds foundational compute infrastructure for systems where correctness is not optional. We work on electronic systems that operate beyond the reach of intervention, where failure is catastrophic, behaviour must be understood in advance, and confidence must be earned, not assumed.
+      about: `Kronus builds foundational compute infrastructure for systems where correctness is not optional. We work on electronic systems that operate beyond the reach of intervention, where failure is catastrophic, behaviour must be understood in advance, and confidence must be earned, not assumed.
 
 Arcturus is our answer to this problem: a compute and development platform designed from the ground up for safety-critical systems. It combines deterministic hardware, constrained software environments, and tightly integrated testing and evidence generation to make system behaviour legible, predictable, and defensible. Rather than treating assurance and certification as downstream processes, Arcturus embeds them directly into how systems are designed, built, and validated.
 
@@ -257,12 +257,12 @@ We are starting in the space industry (satellites, launch vehicles, and supporti
       ],
       howToApply: 'Please apply through this Google Form.',
       applicationLink: 'https://forms.gle/RZq6SpFDjfoTMW898', // Add your Google Form link here
-      equalOpportunity: 'Kronos Space is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
+      equalOpportunity: 'Kronus is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
     },
     'ml-systems-engineer': {
       title: 'Machine Learning Systems Engineer',
       details: 'Part-time | On-site (Collingwood, VIC)',
-      about: `Kronos Space builds foundational compute infrastructure for systems where correctness is not optional. We work on electronic systems that operate beyond the reach of intervention, where failure is catastrophic, behaviour must be understood in advance, and confidence must be earned, not assumed.
+      about: `Kronus builds foundational compute infrastructure for systems where correctness is not optional. We work on electronic systems that operate beyond the reach of intervention, where failure is catastrophic, behaviour must be understood in advance, and confidence must be earned, not assumed.
 
 Arcturus is our answer to this problem: a compute and development platform designed from the ground up for safety-critical systems. It combines deterministic hardware, constrained software environments, and tightly integrated testing and evidence generation to make system behaviour legible, predictable, and defensible. Rather than treating assurance and certification as downstream processes, Arcturus embeds them directly into how systems are designed, built, and validated.
 
@@ -303,19 +303,19 @@ We are starting in the space industry (satellites, launch vehicles, and supporti
       ],
       howToApply: 'Please apply through this Google Form.',
       applicationLink: 'https://forms.gle/LGQZyHD5AwF5VKbQ8', // Add your Google Form link here
-      equalOpportunity: 'Kronos Space is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
+      equalOpportunity: 'Kronus is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
     },
     'university-capstone': {
       title: 'University Capstone EOI',
       details: '',
-      about: `Kronos Space builds foundational compute infrastructure for systems where correctness is not optional. We work on electronic systems that operate beyond the reach of intervention, where failure is catastrophic, behaviour must be understood in advance, and confidence must be earned, not assumed.
+      about: `Kronus builds foundational compute infrastructure for systems where correctness is not optional. We work on electronic systems that operate beyond the reach of intervention, where failure is catastrophic, behaviour must be understood in advance, and confidence must be earned, not assumed.
 
       Arcturus is our answer to this problem: a compute and development platform designed from the ground up for safety-critical systems. It combines deterministic hardware, constrained software environments, and tightly integrated testing and evidence generation to make system behaviour legible, predictable, and defensible. Rather than treating assurance and certification as downstream processes, Arcturus embeds them directly into how systems are designed, built, and validated.
       
       We are starting in the space industry (satellites, launch vehicles, and supporting ground systems) because it represents one of the most demanding operating environments imaginable. The same constraints apply across a wider set of domains, from autonomous and industrial systems to critical power infrastructure. We are a small, deeply technical team building this infrastructure from first principles.`,
       roleSummary: `You'll work alongside engineers in an active startup, taking real ownership of a piece of work that actually matters. Expect to build things, break things, debug real problems, and make decisions that shape how the project evolves. You'll get exposure not just to technical engineering, but also to how a technical startup operates day-to-day; from iteration and trade-offs to collaboration in a small team. You'll have access to people, hardware, and a proper engineering environment. This is a great fit for students who like learning by doing, want more responsibility than a standard capstone, and are excited by the idea of contributing to something real.`,
       howToApply: `We're currently working with the universities to scope out these projects. If you'd be interested in learning more, please shoot us an email at info@kesslr.com`,
-      equalOpportunity: 'Kronos Space is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
+      equalOpportunity: 'Kronus is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
     }
   };
   
