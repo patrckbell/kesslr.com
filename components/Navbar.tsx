@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 interface NavbarProps {
-  currentPage: 'home' | 'contact' | 'investors' | 'privacy' | 'careers';
-  setCurrentPage: (page: 'home' | 'contact' | 'investors' | 'privacy' | 'careers') => void;
+  currentPage: 'home' | 'contact' | 'privacy' | 'careers';
+  setCurrentPage: (page: 'home' | 'contact' | 'privacy' | 'careers') => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const handleNavClick = (page: 'home' | 'contact' | 'investors' | 'privacy' | 'careers') => {
+  const handleNavClick = (page: 'home' | 'contact' | 'privacy' | 'careers') => {
     setCurrentPage(page);
     window.scrollTo(0, 0);
     setIsMobileMenuOpen(false);
@@ -52,27 +52,6 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) => {
                 style={{ width: '150px' }}
               >
                 / HOME
-              </button>
-            </div>
-            
-            {/* INVESTORS Button */}
-            <div className="relative">
-              {/* Corner brackets for INVESTORS button - top-right, bottom-right */}
-              <div className="absolute -top-[1px] -left-[1px] w-1.5 h-1.5 border-t border-l border-white z-10"></div>
-              <div className="absolute -top-[1px] -right-[1px] w-1.5 h-1.5 border-t border-r border-white z-10"></div>
-              <div className="absolute -bottom-[1px] -left-[1px] w-1.5 h-1.5 border-b border-l border-white z-10"></div>
-              <div className="absolute -bottom-[1px] -right-[1px] w-1.5 h-1.5 border-b border-r border-white z-10"></div>
-              
-              <button
-                onClick={() => handleNavClick('investors')}
-                className={`relative text-[12px] font-regular tracking-widest px-6 py-3 font-nippo transition-all duration-200 flex-shrink-0 border-t border-l border-r border-b border-[#2E2E2E] ${
-                  currentPage === 'investors'
-                    ? 'text-[#00B7FF] bg-[#0a2a2f] hover:text-[#4DD0FF] hover:bg-[#0D353B]'
-                    : 'text-gray-400 bg-black/40 hover:text-white hover:bg-black/60'
-                }`}
-                style={{ width: '150px' }}
-              >
-                / INVEST
               </button>
             </div>
             
@@ -136,16 +115,6 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) => {
               }`}
             >
               / HOME
-            </button>
-            <button
-              onClick={() => handleNavClick('investors')}
-              className={`w-full text-left px-4 py-3 text-sm font-nippo border border-[#2E2E2E] ${
-                currentPage === 'investors'
-                  ? 'text-[#00B7FF] bg-[#0a2a2f]'
-                  : 'text-gray-400 bg-black/40'
-              }`}
-            >
-              / INVEST
             </button>
             <button
               onClick={() => handleNavClick('careers')}

@@ -2,7 +2,7 @@
 import React from 'react';
 
 interface FooterProps {
-  setCurrentPage: (page: 'home' | 'contact' | 'investors' | 'privacy') => void;
+  setCurrentPage: (page: 'home' | 'contact' | 'privacy') => void;
 }
 
 const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {

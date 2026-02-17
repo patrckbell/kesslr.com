@@ -118,7 +118,7 @@ const Contact: React.FC = () => {
           <p className="text-gray-500 text-[12px]" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
             Or reach out directly at{' '}
             <a href="mailto:info@kesslr.com" className="text-cyan-500 hover:text-cyan-400 transition-colors">
-              info@kesslr.com
+              info@kronus.io
             </a>
           </p>
         </div>

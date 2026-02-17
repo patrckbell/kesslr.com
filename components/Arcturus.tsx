@@ -17,8 +17,8 @@ const Arcturus: React.FC = () => {
         <p className="text-xs sm:text-sm text-gray-400 mt-2">The unified compute platform for safety-critical systems.</p>
         
         <a
-          href="/resources/Arcturus.pdf"
-          download
+          href="/resources/KRONUS_PLATFORM_OVERVIEW.pdf"
+          download="KRONUS_PLATFORM_OVERVIEW.pdf"
           className="mt-4 inline-block bg-white/10 border border-white/10 text-white text-[10px] px-6 sm:px-9 py-2 sm:py-3 uppercase tracking-wider hover:bg-white/5 hover:text-gray-500 transition-all"
         >
           View the brief<br />(.pdf)

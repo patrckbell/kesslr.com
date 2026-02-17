@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ReachOutProps {
-  setCurrentPage: (page: 'home' | 'contact' | 'investors') => void;
+  setCurrentPage: (page: 'home' | 'contact') => void;
 }
 
 const ReachOut: React.FC<ReachOutProps> = ({ setCurrentPage }) => {
@@ -15,17 +15,15 @@ const ReachOut: React.FC<ReachOutProps> = ({ setCurrentPage }) => {
         }}
       ></div>
       <div className="text-center mb-8 sm:mb-12 w-full">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 sm:mb-6">Reach Out</h2>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 sm:mb-6">Learn More</h2>
         <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0">
-          <button 
-            onClick={() => {
-              setCurrentPage('investors');
-              window.scrollTo(0, 0);
-            }}
-            className="w-full sm:w-auto border border-cyan-800 text-cyan-500 text-[12px] uppercase font-nippo px-6 sm:px-8 py-3 sm:py-4 hover:bg-cyan-900/20 transition-colors"
+          <a
+            href="/resources/KRONUS_ONE_PAGER.pdf"
+            download="KRONUS_ONE_PAGER.pdf"
+            className="w-full sm:w-auto border border-cyan-800 text-cyan-500 text-[12px] uppercase font-nippo px-6 sm:px-8 py-3 sm:py-4 hover:bg-cyan-900/20 transition-colors text-center inline-block"
           >
-            For Investors
-          </button>
+            ONE PAGER
+          </a>
           <button 
             onClick={() => {
               setCurrentPage('contact');

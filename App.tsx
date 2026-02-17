@@ -8,13 +8,12 @@ import Arcturus from './components/Arcturus';
 import ReachOut from './components/ReachOut';
 import Footer from './components/Footer';
 import Contact from './components/Contact';
-import Investors from './components/Investors';
 import Privacy from './components/Privacy';
 import Careers from './components/Careers';
 
 const App: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
-  const [currentPage, setCurrentPage] = useState<'home' | 'contact' | 'investors' | 'privacy' | 'careers'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'contact' | 'privacy' | 'careers'>('home');
   const [isLoaded, setIsLoaded] = useState(false);
 
   // Preload critical images before showing content
@@ -92,15 +91,13 @@ const App: React.FC = () => {
             </>
           ) : currentPage === 'contact' ? (
             <Contact />
-          ) : currentPage === 'investors' ? (
-            <Investors key="investors-page" scrollY={scrollY} />
           ) : currentPage === 'careers' ? (
             <Careers scrollY={scrollY} />
           ) : (
             <Privacy />
           )}
           <Footer setCurrentPage={setCurrentPage} />
-          {/* Gradient overlay spanning the whole page - hidden on investors page */}
+          {/* Gradient overlay spanning the whole page */}
           {currentPage == 'home' && (
             <div 
               className="absolute top-0 left-0 right-0 bottom-0 pointer-events-none"
@@ -110,7 +107,7 @@ const App: React.FC = () => {
               }}
             ></div>
           )}
-          {/* Simple solid overlay for investors page */}
+          {/* Simple solid overlay for non-home pages */}
           {currentPage != 'home' && (
             <div 
               className="absolute top-0 left-0 right-0 bottom-0 pointer-events-none"
