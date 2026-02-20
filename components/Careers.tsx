@@ -423,7 +423,7 @@ const Careers: React.FC<CareersProps> = ({ scrollY }) => {
             </button>
           </div>
 
-          {/* Embedded Software Engineer (Full-time) */}
+          {/* Embedded Firmware Engineer */}
           <div className="relative group cursor-pointer">
             {/* Corner brackets */}
             <div className="absolute -top-[1px] -left-[1px] w-1.5 h-1.5 border-t border-l border-white z-10"></div>
@@ -432,12 +432,12 @@ const Careers: React.FC<CareersProps> = ({ scrollY }) => {
             <div className="absolute -bottom-[1px] -right-[1px] w-1.5 h-1.5 border-b border-r border-white z-10"></div>
             
             <button
-              onClick={() => setSelectedJob('embedded-software-fulltime')}
+              onClick={() => setSelectedJob('embedded-firmware-engineer')}
               className="relative w-full text-left p-4 sm:p-6 bg-[#121212] border border-[#2E2E2E] hover:border-cyan-500/50 hover:bg-[#0a2a2f] transition-all duration-200"
             >
               <div className="flex flex-col gap-2">
                 <div>
-                  <h3 className="text-base sm:text-lg font-normal text-white mb-1">Founding Software Engineer</h3>
+                  <h3 className="text-base sm:text-lg font-normal text-white mb-1">Founding Embedded Firmware Engineer</h3>
                 </div>
                 <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm text-gray-400" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
                   <span>Full-time</span>
@@ -450,7 +450,7 @@ const Careers: React.FC<CareersProps> = ({ scrollY }) => {
             </button>
           </div>
 
-          {/* Machine Learning Systems Engineer */}
+          {/* Software Engineer */}
           <div className="relative group cursor-pointer">
             {/* Corner brackets */}
             <div className="absolute -top-[1px] -left-[1px] w-1.5 h-1.5 border-t border-l border-white z-10"></div>
@@ -459,95 +459,19 @@ const Careers: React.FC<CareersProps> = ({ scrollY }) => {
             <div className="absolute -bottom-[1px] -right-[1px] w-1.5 h-1.5 border-b border-r border-white z-10"></div>
             
             <button
-              onClick={() => setSelectedJob('ml-systems-engineer')}
+              onClick={() => setSelectedJob('software-engineer')}
               className="relative w-full text-left p-4 sm:p-6 bg-[#121212] border border-[#2E2E2E] hover:border-cyan-500/50 hover:bg-[#0a2a2f] transition-all duration-200"
             >
               <div className="flex flex-col gap-2">
                 <div>
-                  <h3 className="text-base sm:text-lg font-normal text-white mb-1">Machine Learning Systems Engineer</h3>
+                  <h3 className="text-base sm:text-lg font-normal text-white mb-1">Founding Software Engineer (Systems & Tooling)</h3>
                 </div>
                 <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm text-gray-400" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
-                  <span>Part-time</span>
+                  <span>Full-time</span>
                   <span>•</span>
                   <span>On-site</span>
                   <span>•</span>
                   <span>Collingwood, VIC</span>
-                </div>
-              </div>
-            </button>
-          </div>
-
-          {/* Software Systems Engineer */}
-          <div className="relative group cursor-pointer">
-            {/* Corner brackets */}
-            <div className="absolute -top-[1px] -left-[1px] w-1.5 h-1.5 border-t border-l border-white z-10"></div>
-            <div className="absolute -top-[1px] -right-[1px] w-1.5 h-1.5 border-t border-r border-white z-10"></div>
-            <div className="absolute -bottom-[1px] -left-[1px] w-1.5 h-1.5 border-b border-l border-white z-10"></div>
-            <div className="absolute -bottom-[1px] -right-[1px] w-1.5 h-1.5 border-b border-r border-white z-10"></div>
-            
-            <button
-              onClick={() => setSelectedJob('software-systems')}
-              className="relative w-full text-left p-4 sm:p-6 bg-[#121212] border border-[#2E2E2E] hover:border-cyan-500/50 hover:bg-[#0a2a2f] transition-all duration-200"
-            >
-              <div className="flex flex-col gap-2">
-                <div>
-                  <h3 className="text-base sm:text-lg font-normal text-white mb-1">Software Systems Engineer</h3>
-                </div>
-                <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm text-gray-400" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
-                  <span>Part-time</span>
-                  <span>•</span>
-                  <span>On-site</span>
-                  <span>•</span>
-                  <span>Collingwood, VIC</span>
-                </div>
-              </div>
-            </button>
-          </div>
-
-          {/* Embedded Software Engineer (Part-time) */}
-          <div className="relative group cursor-pointer">
-            {/* Corner brackets */}
-            <div className="absolute -top-[1px] -left-[1px] w-1.5 h-1.5 border-t border-l border-white z-10"></div>
-            <div className="absolute -top-[1px] -right-[1px] w-1.5 h-1.5 border-t border-r border-white z-10"></div>
-            <div className="absolute -bottom-[1px] -left-[1px] w-1.5 h-1.5 border-b border-l border-white z-10"></div>
-            <div className="absolute -bottom-[1px] -right-[1px] w-1.5 h-1.5 border-b border-r border-white z-10"></div>
-            
-            <button
-              onClick={() => setSelectedJob('embedded-software-parttime')}
-              className="relative w-full text-left p-4 sm:p-6 bg-[#121212] border border-[#2E2E2E] hover:border-cyan-500/50 hover:bg-[#0a2a2f] transition-all duration-200"
-            >
-              <div className="flex flex-col gap-2">
-                <div>
-                  <h3 className="text-base sm:text-lg font-normal text-white mb-1">Embedded Software Engineer</h3>
-                </div>
-                <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm text-gray-400" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
-                  <span>Part-time</span>
-                  <span>•</span>
-                  <span>On-site</span>
-                  <span>•</span>
-                  <span>Collingwood, VIC</span>
-                </div>
-              </div>
-            </button>
-          </div>
-
-          {/* University Capstone EOI */}
-          <div className="relative group cursor-pointer">
-            {/* Corner brackets */}
-            <div className="absolute -top-[1px] -left-[1px] w-1.5 h-1.5 border-t border-l border-white z-10"></div>
-            <div className="absolute -top-[1px] -right-[1px] w-1.5 h-1.5 border-t border-r border-white z-10"></div>
-            <div className="absolute -bottom-[1px] -left-[1px] w-1.5 h-1.5 border-b border-l border-white z-10"></div>
-            <div className="absolute -bottom-[1px] -right-[1px] w-1.5 h-1.5 border-b border-r border-white z-10"></div>
-            
-            <button
-              onClick={() => setSelectedJob('university-capstone')}
-              className="relative w-full text-left p-4 sm:p-6 bg-[#121212] border border-[#2E2E2E] hover:border-cyan-500/50 hover:bg-[#0a2a2f] transition-all duration-200"
-            >
-              <div className="flex flex-col gap-2">
-                <div>
-                  <h3 className="text-base sm:text-lg font-normal text-white mb-1">University Capstone EOI</h3>
-                </div>
-                <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm text-gray-400" style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}>
                 </div>
               </div>
             </button>
