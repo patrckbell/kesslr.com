@@ -84,238 +84,179 @@ const Careers: React.FC<CareersProps> = ({ scrollY }) => {
   
   // Job data
   const jobs = {
+
     'fpga-engineer': {
       title: 'Founding FPGA Engineer',
       details: 'Full-time | On-site (Collingwood, VIC)',
+  
       about: `Kronus builds foundational compute infrastructure for systems where correctness is not optional. We work on electronic systems that operate beyond the reach of intervention, where failure is catastrophic, behaviour must be understood in advance, and confidence must be earned, not assumed.
-
-Arcturus is our answer to this problem: a compute and development platform designed from the ground up for safety-critical systems. It combines deterministic hardware, constrained software environments, and tightly integrated testing and evidence generation to make system behaviour legible, predictable, and defensible. Rather than treating assurance and certification as downstream processes, Arcturus embeds them directly into how systems are designed, built, and validated.
-
-We are starting in the space industry (satellites, launch vehicles, and supporting ground systems) because it represents one of the most demanding operating environments imaginable. The same constraints apply across a wider set of domains, from autonomous and industrial systems to critical power infrastructure. We are a small, deeply technical team building this infrastructure from first principles.`,
-      roleSummary: `You'll be responsible for designing and building core parts of an FPGA-based embedded system, from data acquisition and control logic in FPGA fabric through to the embedded software that configures and validates it. This is a deeply technical role focused on making complex systems behave predictably on real hardware.`,
+  
+  Our answer to this problem is a deterministic compute platform designed for safety-critical systems. It combines custom hardware, constrained runtime environments, and integrated verification and evidence generation to make system behaviour predictable, legible, and certifiable.
+  
+  Rather than treating certification and validation as downstream processes, we embed assurance directly into the architecture. The result is a platform where engineers can design systems whose behaviour is proven by design.`,
+  
+      roleSummary: `This role focuses on designing the deterministic hardware at the core of the platform. You'll implement FPGA logic that defines how the system observes, processes, and controls the physical world, with an emphasis on predictable timing, correctness, and verifiability.
+  
+  You will help define the architecture that future ASIC implementations will be derived from, making this foundational to the long-term evolution of the platform.`,
+  
       whatYoullWorkOn: [
-        'Implementing FPGA logic for data acquisition, processing, and control on SoC-FPGA platforms',
-        'Interfacing high-speed ADCs and peripherals with FPGA fabric, including timing, buffering, and trigger logic',
-        'Integrating FPGA designs with embedded software running on ARM-based processors',
-        'Debugging and validating designs using simulation, hardware instrumentation, and on-target testing',
-        'Contributing to system architecture decisions with an emphasis on determinism, reliability, and testability'
+        'Designing FPGA architectures for deterministic data acquisition, control, and compute',
+        'Implementing and verifying logic using Verilog, VHDL, or SystemVerilog',
+        'Building high-reliability interfaces to sensors, memory, and high-speed peripherals',
+        'Designing streaming datapaths, control logic, and hardware state machines',
+        'Ensuring deterministic timing and observable, testable system behaviour',
+        'Debugging designs using simulation, instrumentation, and on-target hardware',
+        'Contributing to architectural decisions shaping future ASIC implementations'
       ],
+  
       required: [
-        'Experience designing, debugging, and verifying FPGA systems',
-        'Proficiency with Verilog, VHDL, or SystemVerilog',
-        'Experience working on systems where failure mattered (space, aerospace, robotics, med-tech, industrial, infrastructure)',
-        'Comfort debugging hardware using real test equipment (scopes, logic analysers)',
+        'Experience designing and debugging FPGA-based systems',
+        'Proficiency in Verilog, VHDL, or SystemVerilog',
+        'Strong understanding of synchronous digital design',
+        'Experience validating hardware through simulation and real-world testing',
+        'Comfort working directly with hardware and lab equipment',
+        'Ability to reason precisely about timing, state, and system behaviour',
         'Ability to reason from first principles'
       ],
+  
       niceToHave: [
-        'Embedded C/C++ or Rust for FPGA-adjacent firmware',
-        'Experience with FPGA toolchains (Libero, Quartus, Vitis, etc.)',
-        'Exposure to safety-critical standards (DO-178C, DO-254, IEC 61508, etc.)',
-        'Digital signal processing or high-throughput datapath design',
-        'Experience with CI/CD, automated verification, or internal developer tooling',
+        'Experience with SoC-FPGA platforms (PolarFire SoC, Zynq, etc.)',
+        'Experience building datapaths, DSP pipelines, or accelerators',
+        'Experience with SoC platforms (ARM Cortex-A/R/M, RISC-V, etc.)',
+        'Exposure to safety-critical hardware standards (DO-254, IEC 61508, etc.)',
+        'Experience preparing designs for ASIC implementation',
+        'Embedded firmware experience for FPGA-adjacent processors',
+        'Experience building internal hardware tooling or automation',
         'Linux-based development environments'
       ],
+  
       location: [
         'Full-time role',
-        'On-site, based out of our Collingwood, Victoria office',
-        'Company plans to relocate to the USA within the year; visa and relocation costs will be covered',
-        'Salary range: $80k-$120k AUD'
+        'On-site, Collingwood, Victoria',
+        'Salary range: $80k–$120k AUD'
       ],
+  
       howToApply: 'Please apply through this Google Form.',
-      applicationLink: 'https://forms.gle/XrW9yfWbpgUzKQth8', // Add your Google Form link here
-      equalOpportunity: 'Kronus is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
+      applicationLink: 'https://forms.gle/XrW9yfWbpgUzKQth8',
+  
+      equalOpportunity: 'Kronus is an equal opportunity employer.'
     },
-    'embedded-software-fulltime': {
-      title: 'Founding Software Engineer',
+  
+  
+  
+    'embedded-firmware-engineer': {
+      title: 'Founding Embedded Firmware Engineer',
       details: 'Full-time | On-site (Collingwood, VIC)',
-      about: `Kronus builds foundational compute infrastructure for systems where correctness is not optional. We work on electronic systems that operate beyond the reach of intervention, where failure is catastrophic, behaviour must be understood in advance, and confidence must be earned, not assumed.
-
-Arcturus is our answer to this problem: a compute and development platform designed from the ground up for safety-critical systems. It combines deterministic hardware, constrained software environments, and tightly integrated testing and evidence generation to make system behaviour legible, predictable, and defensible. Rather than treating assurance and certification as downstream processes, Arcturus embeds them directly into how systems are designed, built, and validated.
-
-We are starting in the space industry (satellites, launch vehicles, and supporting ground systems) because it represents one of the most demanding operating environments imaginable. The same constraints apply across a wider set of domains, from autonomous and industrial systems to critical power infrastructure. We are a small, deeply technical team building this infrastructure from first principles.`,
-      roleSummary: `This role focuses on building embedded software that directly controls and validates real hardware. You'll work close to the metal on SoC-based systems, writing firmware that configures peripherals, coordinates with FPGA logic, and ensures predictable, correct system behaviour under real-world constraints. In addition, you'll contribute to higher-level system libraries and control software, similar in style to flight software, that sit above the hardware layer and define system behaviour.`,
+  
+      about: `Kronus builds foundational compute infrastructure for systems where correctness is not optional.
+  
+  Our solution is a vertically integrated platform combining deterministic hardware, constrained runtime environments, and automated verification to enable certifiable system behaviour. Firmware is a critical part of this platform, acting as the interface between programmable logic, physical hardware, and higher-level system logic.
+  
+  We are building firmware that does not merely control hardware, but defines, constrains, and validates system behaviour. This is closer in spirit to flight software than traditional embedded development.`,
+  
+      roleSummary: `This role focuses on building the firmware and runtime layers that bring the platform to life. You'll write low-level software that configures hardware, coordinates execution, enforces system invariants, and ensures predictable, correct operation.
+  
+  You will work close to the hardware, defining the boundary between programmable logic and software, and shaping the runtime environment that applications rely on.`,
+  
       whatYoullWorkOn: [
-        'Writing embedded C/C++/Rust firmware for SoC-based systems, including processor bring-up and peripheral configuration',
-        'Developing low-level drivers and interfaces for sensors, ADCs, memory, and communication buses',
-        'Coordinating embedded software with FPGA logic for control, configuration, and data flow',
-        'Designing and implementing higher-level system libraries and control layers, similar in style to flight software',
-        'Defining system state, control flows, and fault handling behaviour in software',
-        'Building test, validation, and diagnostic tooling to verify system behaviour on real hardware',
-        'Working closely with hardware and FPGA engineers during integration and bring-up'
+        'Developing embedded firmware in C, C++, or Rust for SoC-based platforms',
+        'Implementing low-level drivers for memory, sensors, and hardware peripherals',
+        'Bringing up processors, configuring hardware, and debugging system integration',
+        'Building runtime components that manage system state, execution, and safety invariants',
+        'Designing interfaces between FPGA logic and software layers',
+        'Implementing validation, monitoring, and diagnostic capabilities',
+        'Supporting hardware bring-up, integration, and verification'
       ],
+  
       required: [
-        'Experience developing embedded software for hardware-centric systems',
-        'Strong proficiency in C/C++ or Rust for embedded environments',
-        'Experience bringing up and debugging software on real hardware (processors, peripherals, boards)',
-        'Comfort working close to the metal, including registers, memory maps, and hardware datasheets',
-        'Ability to design clear interfaces between low-level drivers and higher-level system logic',
-        'Experience working on systems where failure mattered (space, aerospace, robotics, med-tech, industrial, infrastructure)',
-        'Ability to reason from first principles about system behaviour and failure modes'
+        'Experience writing embedded firmware for real hardware systems',
+        'Strong proficiency in C, C++, or Rust',
+        'Comfort working with registers, memory maps, and hardware datasheets',
+        'Experience debugging embedded systems on physical hardware',
+        'Understanding of system-level behaviour and failure modes',
+        'Ability to design robust, predictable firmware architectures',
+        'Ability to reason from first principles'
       ],
+  
       niceToHave: [
-        'Experience with RTOSes or embedded Linux (tasking, scheduling, IPC)',
-        'Exposure to flight-software-style architectures (state machines, sequencing, health monitoring, fault handling)',
-        'Experience interfacing embedded software with FPGA logic or other programmable hardware',
-        'Familiarity with embedded communication protocols (SPI, I²C, CAN, UART, Ethernet, etc.)',
-        'Exposure to safety-critical or high-assurance development practices (DO-178C, IEC 61508, MISRA, etc.)',
-        'Experience building test, validation, or diagnostic tooling for embedded systems',
-        'Linux-based development environments and version-controlled workflows'
+        'Experience with SoC platforms (ARM Cortex-A/R/M, RISC-V, etc.)',
+        'Experience with FPGA-based systems',
+        'Exposure to RTOSes or embedded runtime systems',
+        'Experience in safety-critical domains (space, aerospace, robotics, infrastructure)',
+        'Experience implementing state machines or control systems',
+        'Experience with automated testing or validation infrastructure',
+        'Linux-based development environments'
       ],
+  
       location: [
         'Full-time role',
-        'On-site, based out of our Collingwood, Victoria office',
-        'Company plans to relocate to the USA within the year; visa and relocation costs will be covered',
-        'Salary range: $80k-$120k AUD'
+        'On-site, Collingwood, Victoria',
+        'Salary range: $80k–$140k AUD'
       ],
+  
       howToApply: 'Please apply through this Google Form.',
-      applicationLink: 'https://forms.gle/SDDucL8evUfvLCwF7', // Add your Google Form link here
-      equalOpportunity: 'Kronus is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
+      applicationLink: 'https://forms.gle/SDDucL8evUfvLCwF7',
+  
+      equalOpportunity: 'Kronus is an equal opportunity employer.'
     },
-    'software-systems': {
-      title: 'Software Systems Engineer',
-      details: 'Part-time | On-site (Collingwood, VIC)',
-      about: `Kronus builds foundational compute infrastructure for systems where correctness is not optional. We work on electronic systems that operate beyond the reach of intervention, where failure is catastrophic, behaviour must be understood in advance, and confidence must be earned, not assumed.
-
-Arcturus is our answer to this problem: a compute and development platform designed from the ground up for safety-critical systems. It combines deterministic hardware, constrained software environments, and tightly integrated testing and evidence generation to make system behaviour legible, predictable, and defensible. Rather than treating assurance and certification as downstream processes, Arcturus embeds them directly into how systems are designed, built, and validated.
-
-We are starting in the space industry (satellites, launch vehicles, and supporting ground systems) because it represents one of the most demanding operating environments imaginable. The same constraints apply across a wider set of domains, from autonomous and industrial systems to critical power infrastructure. We are a small, deeply technical team building this infrastructure from first principles.`,
-      roleSummary: `This role focuses on the software systems that sit around and above the core hardware platform. You'll work on flight-software-style system logic, developer tooling, and orchestration layers that tie together FPGA designs, embedded software, simulation, and test infrastructure. The work is systems-oriented and integration-focused, shaping how engineers interact with, configure, test, and reason about the platform.`,
+  
+  
+  
+    'software-engineer': {
+      title: 'Founding Software Engineer (Systems & Tooling)',
+      details: 'Full-time | On-site (Collingwood, VIC)',
+  
+      about: `Kronus builds foundational compute infrastructure for systems where correctness is not optional.
+  
+  Our solution is a complete development and execution environment. The platform includes system definition tools, build pipelines, validation infrastructure, and developer tooling that make system behaviour explicit, observable, and certifiable.
+  
+  We are building the software layer that allows engineers to define, configure, test, and reason about complex embedded systems with clarity and confidence.`,
+  
+      roleSummary: `This role focuses on the software systems and tooling that sit above the hardware and firmware layers. You'll build developer tooling, orchestration systems, software libraries, and application-layer infrastructure that define how engineers interact with the platform.
+  
+  This includes compilers, system configuration tools, testing infrastructure, and developer workflows. Your work will directly shape the developer experience and capabilities of the platform.`,
+  
       whatYoullWorkOn: [
-        'Developing flight-software-style system logic, such as state machines, sequencing, configuration, and health monitoring',
-        'Building tooling and orchestration layers that coordinate simulations, tests, hardware runs, and data collection',
-        'Designing clean interfaces between embedded software, FPGA workflows, and host-side tools',
-        'Improving developer experience through scripting, automation, and internal utilities',
-        'Supporting integration and test workflows by making system behaviour observable and repeatable',
-        'Collaborating with FPGA and embedded engineers to ensure tooling and system software align with real hardware constraints'
+        'Building system definition tools, compilers, and configuration infrastructure',
+        'Developing tooling that orchestrates builds, tests, and hardware execution',
+        'Implementing software that interfaces with embedded and FPGA-based systems',
+        'Designing internal developer tooling to improve observability and correctness',
+        'Designing and implementing safety-critical software libraries',
+        'Building validation, testing, and verification infrastructure',
+        'Designing APIs and abstractions that define system behaviour',
+        'Improving development workflows and engineering productivity'
       ],
+  
       required: [
-        'Experience building software systems that coordinate or orchestrate other components',
-        'Strong proficiency in Python and/or modern C++ for systems tooling',
-        'Experience designing state machines, sequencing logic, or system controllers',
-        'Comfort working across boundaries between software, embedded systems, and hardware workflows',
-        'Experience building internal tools, scripts, or automation to support engineering teams',
-        'Ability to reason about system behaviour, failure modes, and observability',
-        'Strong written communication and ability to document system behaviour clearly'
+        'Strong proficiency in Python, Rust, or modern C++',
+        'Experience building complex software systems or developer tooling',
+        'Ability to design clean abstractions and interfaces',
+        'Strong systems thinking and architectural reasoning',
+        'Experience working close to operating systems, hardware, or compilers',
+        'Ability to reason about system correctness and behaviour',
+        'Ability to reason from first principles'
       ],
+  
       niceToHave: [
-        'Exposure to flight software–style architectures (state, modes, health monitoring, fault handling)',
-        'Experience orchestrating tests, simulations, or hardware-in-the-loop workflows',
-        'Familiarity with build systems, CI/CD, or automated testing pipelines',
-        'Experience working with embedded or FPGA-based systems (at the interface level, not RTL)',
-        'Experience with Linux-based development environments',
-        'Background in space, robotics, or other safety- or reliability-focused domains'
+        'Experience building compilers, build systems, or language tooling',
+        'Experience with embedded systems or hardware-adjacent software',
+        'Experience building testing, CI/CD, or validation infrastructure',
+        'Experience with distributed systems or orchestration',
+        'Experience with Rust or strongly typed systems languages',
+        'Experience in safety-critical or infrastructure domains',
+        'Linux-based development environments'
       ],
+  
       location: [
-        'Part-time role: 16-24hrs/week (2-3 days)',
-        'On-site, based out of our Collingwood, Victoria office',
-        'Flexible working arrangements available for university students; office located near university',
-        'Salary range: $30-$40 AUD/hr'
+        'Full-time role',
+        'On-site, Collingwood, Victoria',
+        'Salary range: $80k–$140k AUD'
       ],
+  
       howToApply: 'Please apply through this Google Form.',
-      applicationLink: 'https://forms.gle/K2c7QQEqFocuGLi1A', // Add your Google Form link here
-      equalOpportunity: 'Kronus is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
-    },
-    'embedded-software-parttime': {
-      title: 'Embedded Software Engineer',
-      details: 'Part-time | On-site (Collingwood, VIC)',
-      about: `Kronus builds foundational compute infrastructure for systems where correctness is not optional. We work on electronic systems that operate beyond the reach of intervention, where failure is catastrophic, behaviour must be understood in advance, and confidence must be earned, not assumed.
-
-Arcturus is our answer to this problem: a compute and development platform designed from the ground up for safety-critical systems. It combines deterministic hardware, constrained software environments, and tightly integrated testing and evidence generation to make system behaviour legible, predictable, and defensible. Rather than treating assurance and certification as downstream processes, Arcturus embeds them directly into how systems are designed, built, and validated.
-
-We are starting in the space industry (satellites, launch vehicles, and supporting ground systems) because it represents one of the most demanding operating environments imaginable. The same constraints apply across a wider set of domains, from autonomous and industrial systems to critical power infrastructure. We are a small, deeply technical team building this infrastructure from first principles.`,
-      roleSummary: `This role focuses on targeted embedded software development in support of hardware bring-up, testing, and validation. You'll work close to the hardware, contributing firmware, drivers, and test utilities that help validate and exercise the system, without owning the full embedded stack. The scope is intentionally constrained to make part-time contribution effective and impactful.`,
-      whatYoullWorkOn: [
-        'Writing and maintaining embedded C/C++ firmware for specific subsystems or peripherals',
-        'Implementing drivers and interfaces for sensors, ADCs, or communication buses',
-        'Developing test and validation firmware used during hardware bring-up and integration',
-        'Supporting coordination between embedded software and FPGA logic for configuration and control',
-        'Debugging and diagnosing issues on real hardware using logs, instrumentation, and lab tools',
-        'Working closely with full-time engineers during defined integration or bring-up phases'
-      ],
-      required: [
-        'Experience writing embedded C/C++ firmware for real hardware systems',
-        'Comfort working close to the hardware (registers, datasheets, memory maps)',
-        'Experience bringing up or debugging embedded software on physical boards',
-        'Familiarity with common embedded communication protocols (SPI, I²C, UART, CAN, etc.)',
-        'Ability to implement drivers, interfaces, or test firmware for specific subsystems',
-        'Comfort debugging with logs, basic instrumentation, and lab tools',
-        'Ability to work effectively within a narrowly defined technical scope'
-      ],
-      niceToHave: [
-        'Experience with SoC-based platforms or processor + programmable logic systems',
-        'Exposure to RTOSes or embedded Linux',
-        'Experience coordinating embedded software with FPGA logic or other accelerators',
-        'Familiarity with hardware bring-up and validation workflows',
-        'Exposure to safety-critical or high-assurance development practices',
-        'Linux-based development environments and version-controlled workflows'
-      ],
-      location: [
-        'Part-time role: 16-24hrs/week (2-3 days)',
-        'On-site, based out of our Collingwood, Victoria office',
-        'Flexible working arrangements available for university students; office located near university',
-        'Salary range: $30-$40 AUD/hr'
-      ],
-      howToApply: 'Please apply through this Google Form.',
-      applicationLink: 'https://forms.gle/RZq6SpFDjfoTMW898', // Add your Google Form link here
-      equalOpportunity: 'Kronus is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
-    },
-    'ml-systems-engineer': {
-      title: 'Machine Learning Systems Engineer',
-      details: 'Part-time | On-site (Collingwood, VIC)',
-      about: `Kronus builds foundational compute infrastructure for systems where correctness is not optional. We work on electronic systems that operate beyond the reach of intervention, where failure is catastrophic, behaviour must be understood in advance, and confidence must be earned, not assumed.
-
-Arcturus is our answer to this problem: a compute and development platform designed from the ground up for safety-critical systems. It combines deterministic hardware, constrained software environments, and tightly integrated testing and evidence generation to make system behaviour legible, predictable, and defensible. Rather than treating assurance and certification as downstream processes, Arcturus embeds them directly into how systems are designed, built, and validated.
-
-We are starting in the space industry (satellites, launch vehicles, and supporting ground systems) because it represents one of the most demanding operating environments imaginable. The same constraints apply across a wider set of domains, from autonomous and industrial systems to critical power infrastructure. We are a small, deeply technical team building this infrastructure from first principles.`,
-      roleSummary: `This role focuses on developing machine learning algorithms and inference pipelines for deployment on constrained, hardware-accelerated edge systems. You'll work on image processing and ML inference for space and other safety-critical environments, collaborating closely with FPGA and hardware engineers to ensure models are architected, simplified, and structured in a way that can be efficiently implemented in hardware. You will act as the bridge between ML models and the underlying accelerator, shaping algorithms, dataflows, and interfaces to enable efficient, deterministic execution on FPGA-based platforms.`,
-      whatYoullWorkOn: [
-        'Developing and adapting ML models for edge inference, with a focus on image processing and computer vision',
-        'Designing inference pipelines suitable for hardware acceleration, including dataflow, memory access patterns, and latency constraints',
-        'Working with FPGA engineers to translate ML models into accelerator-friendly forms (e.g. fixed-point, reduced precision, streaming architectures)',
-        'Exploring and evaluating ML acceleration approaches on FPGA (e.g. custom datapaths, systolic-style pipelines, offload kernels)',
-        'Implementing and testing inference software on embedded and edge platforms',
-        'Profiling performance, power, and accuracy trade-offs under real-world constraints',
-        'Contributing to system-level design decisions where ML, hardware, and mission constraints intersect'
-      ],
-      required: [
-        'Strong background in machine learning, particularly computer vision / image processing',
-        'Experience implementing and training ML models (e.g. CNNs, classical CV pipelines, hybrid approaches)',
-        'Proficiency in Python and at least one ML framework (PyTorch, TensorFlow, JAX, etc.)',
-        'Ability to reason about performance, memory, and numerical precision',
-        'Comfort working at the boundary between algorithms and systems',
-        'Willingness to engage deeply with hardware constraints, even without writing HDL',
-        'Ability to reason from first principles and adapt algorithms to hard constraints'
-      ],
-      niceToHave: [
-        'Experience with edge or embedded ML deployment',
-        'Familiarity with model optimisation techniques (quantisation, pruning, distillation)',
-        'Exposure to hardware-aware ML or ML compilers (TVM, Vitis AI, ONNX, etc.)',
-        'Experience with fixed-point arithmetic or numerical optimisation',
-        'Background in robotics, space systems, or other resource-constrained environments',
-        'Basic familiarity with FPGA concepts (pipelines, parallelism, streaming), even at a conceptual level',
-        'Experience working alongside hardware or FPGA engineers'
-      ],
-      location: [
-        'Part-time role: 16-24hrs/week (2-3 days)',
-        'On-site, based out of our Collingwood, Victoria office',
-        'Flexible working arrangements available for university students; office located near university',
-        'Salary range: $30-$40 AUD/hr'
-      ],
-      howToApply: 'Please apply through this Google Form.',
-      applicationLink: 'https://forms.gle/LGQZyHD5AwF5VKbQ8', // Add your Google Form link here
-      equalOpportunity: 'Kronus is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
-    },
-    'university-capstone': {
-      title: 'University Capstone EOI',
-      details: '',
-      about: `Kronus builds foundational compute infrastructure for systems where correctness is not optional. We work on electronic systems that operate beyond the reach of intervention, where failure is catastrophic, behaviour must be understood in advance, and confidence must be earned, not assumed.
-
-      Arcturus is our answer to this problem: a compute and development platform designed from the ground up for safety-critical systems. It combines deterministic hardware, constrained software environments, and tightly integrated testing and evidence generation to make system behaviour legible, predictable, and defensible. Rather than treating assurance and certification as downstream processes, Arcturus embeds them directly into how systems are designed, built, and validated.
-      
-      We are starting in the space industry (satellites, launch vehicles, and supporting ground systems) because it represents one of the most demanding operating environments imaginable. The same constraints apply across a wider set of domains, from autonomous and industrial systems to critical power infrastructure. We are a small, deeply technical team building this infrastructure from first principles.`,
-      roleSummary: `You'll work alongside engineers in an active startup, taking real ownership of a piece of work that actually matters. Expect to build things, break things, debug real problems, and make decisions that shape how the project evolves. You'll get exposure not just to technical engineering, but also to how a technical startup operates day-to-day; from iteration and trade-offs to collaboration in a small team. You'll have access to people, hardware, and a proper engineering environment. This is a great fit for students who like learning by doing, want more responsibility than a standard capstone, and are excited by the idea of contributing to something real.`,
-      howToApply: `We're currently working with the universities to scope out these projects. If you'd be interested in learning more, please shoot us an email at info@kesslr.com`,
-      equalOpportunity: 'Kronus is an equal opportunity employer. We value thoughtful, capable people from diverse backgrounds and do not discriminate on the basis of race, gender, sexuality, disability, or background.'
+      applicationLink: 'https://forms.gle/K2c7QQEqFocuGLi1A',
+  
+      equalOpportunity: 'Kronus is an equal opportunity employer.'
     }
   };
   
