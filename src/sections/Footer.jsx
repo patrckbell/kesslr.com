@@ -8,7 +8,7 @@ const links = [
 export function Footer() {
   return (
     <footer className="relative overflow-hidden bg-[#005353] pb-0 pt-[50px]">
-      <div className="flex justify-between px-[200px] max-[1100px]:flex-col max-[1100px]:gap-[16px] max-[1100px]:px-[24px]">
+      <div className="flex justify-between px-[clamp(24px,8vw,200px)] max-[1100px]:flex-col max-[1100px]:gap-[16px]">
         <div>
           <div className="font-['Audiowide',sans-serif] text-[32px] leading-none tracking-[0.01em] text-[#e5f0ee]">
             KRONUS

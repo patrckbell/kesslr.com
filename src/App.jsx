@@ -63,14 +63,8 @@ function useSmoothScroll() {
 
 function ViewportSection({ children, background = '#ffffff' }) {
   return (
-    <section className="relative w-screen overflow-hidden" style={{ background }}>
-      <div
-        className="w-[100vw] origin-top-left [transform:scale(var(--scale))]"
-        style={{
-          '--scale': 'min(1, calc(100vw / 504px))',
-          marginBottom: 'calc((var(--scale) - 1) * 100%)',
-        }}
-      >
+    <section className="relative w-full overflow-hidden" style={{ background }}>
+      <div className="mx-auto w-full max-w-[1440px]">
         {children}
       </div>
     </section>
@@ -80,14 +74,8 @@ function ViewportSection({ children, background = '#ffffff' }) {
 
 function ContentSection({ children, background = '#ffffff' }) {
   return (
-    <section className="relative w-screen overflow-hidden" style={{ background }}>
-      <div
-        className="w-[100vw] h-[100vh] origin-top-left [transform:scale(var(--scale))]"
-        style={{
-          '--scale': 'min(1, calc(100vw / 504px))',
-          marginBottom: 'calc((var(--scale) - 1) * 100%)',
-        }}
-      >
+    <section className="relative w-full overflow-hidden" style={{ background }}>
+      <div className="mx-auto min-h-screen w-full max-w-[1440px]">
         {children}
       </div>
     </section>

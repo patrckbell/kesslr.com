@@ -60,27 +60,27 @@ export function Hero() {
   }, [])
 
   return (
-    <section className="px-[280px] pt-[6vh] max-[1100px]:px-[24px]">
-      <h1 className="font-['IBM_Plex_Mono',ui-monospace,monospace] text-[48px] leading-[1.12] tracking-[-0.025em] text-[#222827] max-[1100px]:text-[30px]">
+    <section className="px-[clamp(24px,10vw,280px)] pt-[clamp(40px,6vh,72px)]">
+      <h1 className="font-['IBM_Plex_Mono',ui-monospace,monospace] text-[clamp(30px,4vw,48px)] leading-[1.12] tracking-[-0.025em] text-[#222827]">
         {headline}
         <span className="typing-cursor">|</span>
       </h1>
-      <p className="px-[60px] mt-[16px] max-w-[800px] font-['IBM_Plex_Mono',ui-monospace,monospace] text-[18px] leading-[1.45] tracking-[0.01em] text-[#8b9090]">
+      <p className="mt-[16px] max-w-[800px] px-[clamp(0px,3vw,60px)] font-['IBM_Plex_Mono',ui-monospace,monospace] text-[clamp(16px,1.5vw,18px)] leading-[1.45] tracking-[0.01em] text-[#8b9090]">
         Kronus ingests engineering documentation and automatically generates
         system software, tests, and certifiable artifacts.
       </p>
 
-      <div className="mt-[100px] flex w-full justify-center">
-        <HeroDiagram className="block h-auto w-[90%]" />
+      <div className="mt-[clamp(48px,9vh,100px)] flex w-full justify-center">
+        <HeroDiagram className="block h-auto w-full max-w-[1000px]" />
       </div>
-      <p className="mt-[8vh] text-center font-['IBM_Plex_Sans',sans-serif] text-[16px] tracking-[0.01em] text-black/40">
+      <p className="mt-[clamp(48px,8vh,90px)] text-center font-['IBM_Plex_Sans',sans-serif] text-[clamp(14px,1.2vw,16px)] tracking-[0.01em] text-black/40">
         Backed by:
       </p>
       <div className="mt-[20px] flex w-full justify-center">
         <img
           src="/logos.png"
           alt="Partner logos"
-          className="block h-auto w-[60%] opacity-[40%] object-contain"
+          className="block h-auto w-[min(620px,80%)] opacity-[40%] object-contain"
         />
       </div>
     </section>

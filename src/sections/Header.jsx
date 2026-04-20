@@ -1,6 +1,6 @@
 export function Header() {
   return (
-    <header className="flex items-center justify-between px-[220px] pt-[35px] max-[1100px]:px-[24px]">
+    <header className="flex items-center justify-between px-[clamp(24px,8vw,220px)] pt-[clamp(24px,3vw,35px)]">
       <img
         src="/Brandmark.png"
         alt="Kronus Brandmark"
@@ -10,7 +10,7 @@ export function Header() {
 
       <a
         href="mailto:info@kronus.io"
-        className="font-['Audiowide',sans-serif] text-[16px] tracking-[0.045em] text-[#2b3130]"
+        className="font-['Audiowide',sans-serif] text-[clamp(14px,1.2vw,16px)] tracking-[0.045em] text-[#2b3130]"
       >
         /CONTACT
       </a>
