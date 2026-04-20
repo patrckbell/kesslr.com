@@ -102,11 +102,11 @@ function App() {
         <Platform />
       </ContentSection> */}
 
-      <div className="relative z-[2]">
-        <ViewportSection>
+      <div className="relative z-[2] w-full overflow-hidden bg-[#005353]">
+        <div className="mx-auto w-full max-w-[1440px]">
           {/* <ContactStrip /> */}
           <Footer />
-        </ViewportSection>
+        </div>
       </div>
     </div>
   )
