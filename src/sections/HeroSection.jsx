@@ -108,7 +108,7 @@ function HeroSectionMobile() {
       }}>
         <h1 style={{
           fontFamily: "'IBM Plex Mono', monospace",
-          fontSize: '26px',
+          fontSize: '20px',
           fontWeight: 400,
           lineHeight: 1.2,
           letterSpacing: '-0.02em',

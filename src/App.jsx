@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { GlyphCanvas } from './GlyphCanvas'
 import { HeroSection } from './sections/HeroSection'
 import { ProblemSection } from './sections/ProblemSection'
@@ -134,8 +134,29 @@ function useSmoothScroll(enabled) {
 }
 
 function FixedFooter({ isMobile }) {
+  const ref = useRef(null)
+  useLayoutEffect(() => {
+    if (!isMobile) {
+      document.documentElement.style.removeProperty('--mobile-footer-spacer')
+      return
+    }
+    const el = ref.current
+    if (!el) return
+    const update = () => {
+      const h = el.getBoundingClientRect().height
+      document.documentElement.style.setProperty('--mobile-footer-spacer', `${h}px`)
+    }
+    update()
+    const ro = new ResizeObserver(update)
+    ro.observe(el)
+    window.addEventListener('resize', update)
+    return () => {
+      ro.disconnect()
+      window.removeEventListener('resize', update)
+    }
+  }, [isMobile])
   return (
-    <div style={{
+    <div ref={ref} style={{
       position: 'fixed',
       bottom: 0,
       left: 0,
