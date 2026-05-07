@@ -195,7 +195,7 @@ const BOXES = [
   { id: 'r6', x: 688.116, y: 1.73389, width: 117.548, height: 61.0375, delay: B4 },
 ]
 
-export function HeroDiagram({ className = '' }) {
+export function HeroDiagram({ className = '', style = {} }) {
   const svgRef = useRef(null)
   const [playing, setPlaying] = useState(false)
 
@@ -221,11 +221,12 @@ export function HeroDiagram({ className = '' }) {
       viewBox="0 0 850 263"
       xmlns="http://www.w3.org/2000/svg"
       className={`hero-diagram ${className} ${playing ? 'is-playing' : ''}`}
+      style={style}
       aria-hidden
     >
       <style>{`
         .hero-diagram .shaft {
-          stroke: #005353;
+          stroke: #4c0065;
           stroke-width: 3;
           fill: none;
           stroke-linecap: butt;
@@ -284,7 +285,7 @@ export function HeroDiagram({ className = '' }) {
               r="8"
               cx={a.startDot.cx}
               cy={a.startDot.cy}
-              fill="#005353"
+              fill="#4c0065"
               style={{ '--delay': `${Math.max(0, a.startDot.delay)}s` }}
             />
           )}
@@ -294,7 +295,7 @@ export function HeroDiagram({ className = '' }) {
               r="8"
               cx={a.endDot.cx}
               cy={a.endDot.cy}
-              fill="#005353"
+              fill="#4c0065"
               style={{ '--delay': `${a.endDot.delay}s` }}
             />
           )}
@@ -302,7 +303,7 @@ export function HeroDiagram({ className = '' }) {
             <polygon
               className="head"
               points={a.head.points}
-              fill="#005353"
+              fill="#4c0065"
               style={{ '--delay': `${a.head.delay}s` }}
             />
           )}
@@ -317,7 +318,9 @@ export function HeroDiagram({ className = '' }) {
           y={b.y}
           width={b.width}
           height={b.height}
-          fill="#DEDEDE"
+          fill="#202020"
+          stroke="#4b4b4b"
+          strokeWidth="1.5"
           style={{ '--delay': `${b.delay}s` }}
         />
       ))}

@@ -1,47 +1,120 @@
-const links = [
-  ['Whitepaper', 'LinkedIn'],
-  ['About', 'YouTube'],
-  ['Investors', 'X'],
-  ['Demo', ''],
+const companyLinks = ['Demo', 'Docs', 'Whitepaper']
+const mediaLinks = [
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/kronus-corp' },
+  { label: 'X', href: 'https://x.com/kronuscorp' },
 ]
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden pb-0 pt-[50px]">
-      <div className="flex justify-between px-[clamp(24px,8vw,200px)] max-[1100px]:flex-col max-[1100px]:gap-[16px]">
+    <footer style={{
+      height: 'var(--footer-ht)',
+      background: '#121212',
+      display: 'flex',
+      flexDirection: 'column',
+      overflow: 'hidden',
+    }}>
+
+      {/* top row: logo + links */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        padding: '3% clamp(60px, 13.2vw, 280px) 0',
+        flexShrink: 0,
+      }}>
         <div>
-          <div className="font-['Audiowide',sans-serif] text-[32px] leading-none tracking-[0.01em] text-[#e5f0ee]">
-            KRONUS
-          </div>
-          <div className="mt-[5px] font-['IBM_Plex_Sans',sans-serif] text-[16px] tracking-[0.01em] text-[#9ec3c3]">
+          <img
+            src="/Group%2070.svg"
+            alt="Kronus"
+            style={{
+              height: 'calc(var(--footer-content-ht) * 0.04)',
+              width: 'auto',
+              display: 'block',
+            }}
+          />
+          <div style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: 'calc(var(--footer-content-ht) * 0.02)',
+            letterSpacing: '0.04em',
+            color: '#AFAFAF',
+            marginTop: 'calc(var(--footer-content-ht) * 0.01)',
+          }}>
             info@kronus.io
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-x-[50px] gap-y-[16px] pt-[2px]">
-          <span className="font-['IBM_Plex_Mono',ui-monospace,monospace] text-[18px] text-[#ffffff]">
-            /COMPANY
-          </span>
-          <span className="font-['IBM_Plex_Mono',ui-monospace,monospace] text-[18px] text-[#ffffff]">
-            /MEDIA
-          </span>
-          {links.map(([left, right]) => (
-            <div key={left} className="contents">
-              <span className="font-['IBM_Plex_Sans',sans-serif] text-[18px] text-[#c2dad8]">
-                {left}
-              </span>
-              <span className="font-['IBM_Plex_Sans',sans-serif] text-[18px] text-[#c2dad8]">
-                {right}
-              </span>
+
+        <div style={{ display: 'flex', gap: 'calc(var(--footer-content-ht) * 0.08)' }}>
+          <div>
+            <div style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: 'calc(var(--footer-content-ht) * 0.022)',
+              letterSpacing: '0.06em',
+              color: '#AFAFAF',
+              marginBottom: 'calc(var(--footer-content-ht) * 0.025)',
+            }}>
+              /COMPANY
             </div>
-          ))}
+            {companyLinks.map((link) => (
+              <div key={link} style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: 'calc(var(--footer-content-ht) * 0.022)',
+                color: '#666666',
+                marginBottom: 'calc(var(--footer-content-ht) * 0.018)',
+              }}>
+                {link}
+                <span style={{
+                  color: '#666666',
+                  marginLeft: 'calc(var(--footer-content-ht) * 0.012)',
+                  fontSize: 'calc(var(--footer-content-ht) * 0.016)',
+                }}>
+                  <br />(coming soon)
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div>
+            <div style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: 'calc(var(--footer-content-ht) * 0.022)',
+              letterSpacing: '0.06em',
+              color: '#AFAFAF',
+              marginBottom: 'calc(var(--footer-content-ht) * 0.025)',
+            }}>
+              /MEDIA
+            </div>
+            {mediaLinks.map(({ label, href }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" style={{
+                display: 'block',
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: 'calc(var(--footer-content-ht) * 0.022)',
+                color: '#d3d3d3',
+                marginBottom: 'calc(var(--footer-content-ht) * 0.018)',
+                textDecoration: 'none',
+              }}>
+                {label}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="pointer-events-none mt-[200px] flex w-full justify-center px-0 max-[1100px]:px-[24px]">
+
+      {/* KRONUS watermark — pinned to bottom */}
+      <div style={{
+        flex: 1,
+        display: 'flex',
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        overflow: 'visible',
+      }}>
         <img
-          src="/footer.svg"
+          src="/KRONUS.svg"
           alt=""
-          className="block h-auto w-[98%] max-w-[98%] object-contain"
-          aria-hidden
+          style={{
+            width: '98vw',
+            height: 'auto',
+            display: 'block',
+            opacity: 0.65,
+          }}
         />
       </div>
     </footer>

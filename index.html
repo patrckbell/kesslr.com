@@ -7,12 +7,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Audiowide&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Science+Gothic:wdth,wght@50..200,100..900&family=IBM+Plex+Mono:wght@300;400&display=swap"
       rel="stylesheet"
     />
     <title>Kronus</title>
   </head>
   <body>
+    <script>
+      (function () {
+        function update() {
+          var h = (window.innerHeight * 504) / window.innerWidth;
+          document.documentElement.style.setProperty('--section-ht', h + 'px');
+          document.documentElement.style.setProperty('--contact-ht', h * 0.3333 + 'px');
+          document.documentElement.style.setProperty('--footer-ht', h * 0.6667 + 'px');
+        }
+        update();
+        window.addEventListener('resize', update);
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
