@@ -8,6 +8,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  /* Stop iOS/Safari from inflating font-size on orientation change or
+     when text-only zoom kicks in. Pairs with the locked viewport meta. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -15,6 +22,8 @@
 body {
   margin: 0;
   background: #171717;
+  /* Disable double-tap zoom on mobile while still allowing pan-y scroll. */
+  touch-action: pan-y;
 }
 
 #root {

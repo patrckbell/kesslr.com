@@ -5,7 +5,59 @@ const OUTER = { background: 'rgba(23, 23, 23, 0.85)' }
 const BORDER = { position: 'absolute', bottom: -1, left: 0, right: 0, height: '1px', background: '#202020', zIndex: 9989, pointerEvents: 'none' }
 const GAP_BG = 'linear-gradient(to right, transparent clamp(60px, 13.2vw, 280px), #202020 clamp(60px, 13.2vw, 280px), #202020 calc(100% - clamp(60px, 13.2vw, 280px)), transparent calc(100% - clamp(60px, 13.2vw, 280px)))'
 
-export function ContactSection() {
+const B = '1px solid #202020'
+
+function ContactSectionMobile() {
+  return (
+    <section style={{
+      background: 'rgba(23, 23, 23, 0.92)',
+      padding: '48px 24px 56px',
+      borderTop: B,
+      borderBottom: B,
+      position: 'relative',
+    }}>
+      <h2 style={{
+        fontFamily: "'Science Gothic', sans-serif",
+        fontVariationSettings: '"wdth" 110, "wght" 400',
+        fontSize: '32px',
+        lineHeight: 1.05,
+        color: '#AFAFAF',
+        margin: 0,
+      }}>WORK WITH<br />KRONUS</h2>
+      <p style={{
+        fontFamily: "'IBM Plex Mono', monospace",
+        fontSize: '14px',
+        lineHeight: 1.5,
+        color: '#828282',
+        margin: '14px 0 0',
+      }}>
+        We&apos;re working with a select few design partners
+      </p>
+      <a
+        href="mailto:info@kronus.io"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginTop: '32px',
+          width: '100%',
+          height: '52px',
+          border: '1px solid #3a3a3a',
+          background: 'transparent',
+          fontFamily: "'IBM Plex Mono', monospace",
+          fontSize: '14px',
+          letterSpacing: '0.08em',
+          color: '#c2c2c2',
+          textDecoration: 'none',
+        }}
+      >
+        REACH OUT
+      </a>
+    </section>
+  )
+}
+
+function ContactSectionDesktop() {
   return (
     <section style={{
       height: '25vh',
@@ -16,10 +68,8 @@ export function ContactSection() {
       position: 'relative',
     }}>
 
-      {/* Outer left margin */}
       <Cell style={OUTER} />
 
-      {/* Center content */}
       <Cell style={{
         ...CELL,
         display: 'flex',
@@ -72,12 +122,14 @@ export function ContactSection() {
         </a>
       </Cell>
 
-      {/* Outer right margin */}
       <Cell style={OUTER} />
 
-      {/* Bottom border */}
       <div style={BORDER} />
 
     </section>
   )
+}
+
+export function ContactSection({ isMobile = false }) {
+  return isMobile ? <ContactSectionMobile /> : <ContactSectionDesktop />
 }

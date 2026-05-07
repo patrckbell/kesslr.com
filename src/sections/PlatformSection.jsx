@@ -27,7 +27,82 @@ const B = '1px solid #202020'
 const CELL = { background: '#171717', borderRight: B, borderBottom: B, boxSizing: 'border-box' }
 const OUTER = { background: 'rgba(23, 23, 23, 0.85)', borderRight: B, borderBottom: B, boxSizing: 'border-box' }
 
-export function PlatformSection() {
+function PlatformSectionMobile() {
+  return (
+    <section style={{
+      background: 'rgba(23, 23, 23, 0.92)',
+      borderBottom: B,
+      position: 'relative',
+      padding: '48px 0',
+    }}>
+      <div style={{ padding: '0 24px 32px', borderBottom: B }}>
+        <h2 style={{
+          fontFamily: "'Science Gothic', sans-serif",
+          fontVariationSettings: '"wdth" 110, "wght" 400',
+          fontSize: '36px',
+          lineHeight: 1,
+          color: '#AFAFAF',
+          margin: 0,
+        }}>KRONUS<br />PLATFORM</h2>
+      </div>
+
+      {textBlocks.map((block, i) => (
+        <div
+          key={`tb-${i}`}
+          style={{
+            padding: '32px 24px',
+            borderBottom: B,
+          }}
+        >
+          <p style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '17px',
+            fontWeight: 300,
+            lineHeight: 1.35,
+            color: '#AFAFAF',
+            margin: 0,
+          }}>{block.heading}</p>
+          <p style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '14px',
+            lineHeight: 1.55,
+            color: '#828282',
+            fontWeight: 300,
+            margin: '14px 0 0',
+          }}>{block.body}</p>
+        </div>
+      ))}
+
+      <div style={{ padding: '32px 24px 0' }}>
+        {steps.map((step, i) => (
+          <div
+            key={step.label}
+            style={{
+              padding: '14px 0',
+              borderBottom: i === steps.length - 1 ? 'none' : '1px solid #1d1d1d',
+            }}
+          >
+            <div style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '15px',
+              lineHeight: 1.3,
+              color: '#c2c2c2',
+            }}>{step.label}</div>
+            <div style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '13px',
+              lineHeight: 1.4,
+              color: '#5a5a5a',
+              marginTop: '4px',
+            }}>{step.sub}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function PlatformSectionDesktop() {
   return (
     <section style={{
       height: '100vh',
@@ -39,10 +114,8 @@ export function PlatformSection() {
       position: 'relative',
     }}>
 
-      {/* Outer left: col 1, all rows */}
       <Cell style={{ ...OUTER, gridColumn: 1, gridRow: '1 / 5' }} />
 
-      {/* Heading: cols 2–5, row 1 */}
       <Cell style={{
         ...CELL,
         gridColumn: '2 / 6',
@@ -61,15 +134,12 @@ export function PlatformSection() {
         }}>KRONUS PLATFORM</h2>
       </Cell>
 
-      {/* Outer right: col 6, all rows */}
       <Cell style={{ ...OUTER, gridColumn: 6, gridRow: '1 / 5' }} />
 
-      {/* Inner left narrow: col 2, rows 2–4 */}
       <Cell style={{ ...CELL, gridColumn: 2, gridRow: 2 }} />
       <Cell style={{ ...CELL, gridColumn: 2, gridRow: 3 }} />
       <Cell style={{ ...CELL, gridColumn: 2, gridRow: 4 }} />
 
-      {/* Text blocks: col 3, rows 2–4 */}
       {textBlocks.map((block, i) => (
         <Cell key={`tb-${i}`} style={{
           ...CELL,
@@ -102,7 +172,6 @@ export function PlatformSection() {
         </Cell>
       ))}
 
-      {/* Steps: col 4, rows 2–4 (spanning) */}
       <Cell style={{
         ...CELL,
         gridColumn: 4,
@@ -131,9 +200,12 @@ export function PlatformSection() {
         ))}
       </Cell>
 
-      {/* Inner right narrow: col 5, rows 2–4 (spanning) */}
       <Cell style={{ ...CELL, gridColumn: 5, gridRow: '2 / 5' }} />
 
     </section>
   )
+}
+
+export function PlatformSection({ isMobile = false }) {
+  return isMobile ? <PlatformSectionMobile /> : <PlatformSectionDesktop />
 }

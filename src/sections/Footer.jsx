@@ -4,7 +4,113 @@ const mediaLinks = [
   { label: 'X', href: 'https://x.com/kronuscorp' },
 ]
 
-export function Footer() {
+function FooterMobile() {
+  return (
+    <footer style={{
+      background: '#121212',
+      display: 'flex',
+      flexDirection: 'column',
+      overflow: 'hidden',
+      paddingTop: '40px',
+    }}>
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '32px',
+        padding: '0 24px',
+      }}>
+        <div>
+          <img
+            src="/Group%2070.svg"
+            alt="Kronus"
+            style={{ height: '24px', width: 'auto', display: 'block' }}
+          />
+          <div style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '13px',
+            letterSpacing: '0.04em',
+            color: '#AFAFAF',
+            marginTop: '10px',
+          }}>
+            info@kronus.io
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap' }}>
+          <div>
+            <div style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '12px',
+              letterSpacing: '0.06em',
+              color: '#AFAFAF',
+              marginBottom: '12px',
+            }}>
+              /COMPANY
+            </div>
+            {companyLinks.map((link) => (
+              <div key={link} style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: '13px',
+                color: '#666666',
+                marginBottom: '8px',
+                lineHeight: 1.4,
+              }}>
+                {link}{' '}
+                <span style={{ color: '#5a5a5a', fontSize: '11px' }}>
+                  (coming soon)
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div>
+            <div style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: '12px',
+              letterSpacing: '0.06em',
+              color: '#AFAFAF',
+              marginBottom: '12px',
+            }}>
+              /MEDIA
+            </div>
+            {mediaLinks.map(({ label, href }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" style={{
+                display: 'block',
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: '13px',
+                color: '#d3d3d3',
+                marginBottom: '8px',
+                textDecoration: 'none',
+              }}>
+                {label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div style={{
+        marginTop: '32px',
+        display: 'flex',
+        justifyContent: 'center',
+        overflow: 'hidden',
+      }}>
+        <img
+          src="/KRONUS.svg"
+          alt=""
+          style={{
+            width: '100vw',
+            height: 'auto',
+            display: 'block',
+            opacity: 0.65,
+          }}
+        />
+      </div>
+    </footer>
+  )
+}
+
+function FooterDesktop() {
   return (
     <footer style={{
       height: 'var(--footer-ht)',
@@ -14,7 +120,6 @@ export function Footer() {
       overflow: 'hidden',
     }}>
 
-      {/* top row: logo + links */}
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
@@ -98,7 +203,6 @@ export function Footer() {
         </div>
       </div>
 
-      {/* KRONUS watermark — pinned to bottom */}
       <div style={{
         flex: 1,
         display: 'flex',
@@ -119,4 +223,8 @@ export function Footer() {
       </div>
     </footer>
   )
+}
+
+export function Footer({ isMobile = false }) {
+  return isMobile ? <FooterMobile /> : <FooterDesktop />
 }

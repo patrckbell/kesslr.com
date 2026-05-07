@@ -64,7 +64,19 @@ export const SpinArrows = forwardRef(function SpinArrows(_, ref) {
           <path d="M 0 2.5 L 10 5 L 0 7.5 Z" fill="#4c0065" />
         </marker>
       </defs>
-      <g ref={gRef} style={{ transformOrigin: '50px 50px' }}>
+      {/* Safari: CSS transform-origin pixel values on SVG <g> are computed
+          in viewport (CSS) coordinates, not SVG user units, which makes the
+          element pivot around its top-left edge. transform-box: fill-box
+          makes the origin relative to the element's bounding box, and
+          'center' then resolves to the geometric centre. */}
+      <g
+        ref={gRef}
+        style={{
+          transformBox: 'fill-box',
+          transformOrigin: 'center',
+          willChange: 'transform',
+        }}
+      >
         <path
           d="M 60.3 21.8 A 30 30 0 0 1 60.3 78.2"
           stroke="#4c0065"

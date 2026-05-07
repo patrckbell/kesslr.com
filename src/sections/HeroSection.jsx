@@ -18,9 +18,8 @@ const B = '1px solid #202020'
 const CELL = { background: '#171717', borderRight: B, borderBottom: B, boxSizing: 'border-box' }
 const OUTER = { background: 'rgba(23, 23, 23, 0.85)', borderRight: B, borderBottom: B, boxSizing: 'border-box' }
 
-export function HeroSection() {
+function useTypingHeadline() {
   const [headline, setHeadline] = useState(TYPE_PREFIX)
-
   useEffect(() => {
     let timeoutId
     let wordIndex = 0
@@ -60,7 +59,108 @@ export function HeroSection() {
     timeoutId = setTimeout(tick, 500)
     return () => clearTimeout(timeoutId)
   }, [])
+  return headline
+}
 
+function HeroSectionMobile() {
+  const headline = useTypingHeadline()
+  return (
+    <section style={{
+      minHeight: '100vh',
+      background: 'rgba(23, 23, 23, 0.92)',
+      borderBottom: B,
+      display: 'flex',
+      flexDirection: 'column',
+      position: 'relative',
+    }}>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '20px 24px',
+        borderBottom: B,
+      }}>
+        <img
+          src="/Group%2070.svg"
+          alt="Kronus"
+          style={{ height: '22px', width: 'auto', display: 'block' }}
+        />
+        <a
+          href="mailto:info@kronus.io"
+          style={{
+            fontFamily: "'Science Gothic', sans-serif",
+            fontSize: '13px',
+            letterSpacing: '0.08em',
+            color: '#AFAFAF',
+            textDecoration: 'none',
+          }}
+        >
+          /CONTACT
+        </a>
+      </div>
+
+      <div style={{
+        flex: 1,
+        padding: '48px 24px 32px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+      }}>
+        <h1 style={{
+          fontFamily: "'IBM Plex Mono', monospace",
+          fontSize: '26px',
+          fontWeight: 400,
+          lineHeight: 1.2,
+          letterSpacing: '-0.02em',
+          color: '#AFAFAF',
+          margin: 0,
+        }}>
+          {headline}
+          <span className="typing-cursor" style={{ color: '#AFAFAF' }}>|</span>
+        </h1>
+        <p style={{
+          fontFamily: "'IBM Plex Mono', monospace",
+          fontSize: '14px',
+          lineHeight: 1.55,
+          color: '#828282',
+          fontWeight: 300,
+          marginTop: '20px',
+          marginBottom: 0,
+        }}>
+          Kronus ingests engineering documentation and automatically generates system software, tests, and certifiable artifacts.
+        </p>
+      </div>
+
+      <div style={{
+        padding: '24px 24px 48px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        borderTop: B,
+      }}>
+        <p style={{
+          fontFamily: "'IBM Plex Mono', monospace",
+          fontSize: '13px',
+          letterSpacing: '0.06em',
+          color: '#828282',
+          margin: 0,
+          fontWeight: 400,
+          alignSelf: 'flex-start',
+        }}>
+          Backed by:
+        </p>
+        <img
+          src="/logos.png"
+          alt="Partner logos"
+          style={{ marginTop: '20px', width: '85%', maxWidth: '320px', display: 'block' }}
+        />
+      </div>
+    </section>
+  )
+}
+
+function HeroSectionDesktop() {
+  const headline = useTypingHeadline()
   return (
     <section style={{
       height: '100vh',
@@ -177,4 +277,8 @@ export function HeroSection() {
 
     </section>
   )
+}
+
+export function HeroSection({ isMobile = false }) {
+  return isMobile ? <HeroSectionMobile /> : <HeroSectionDesktop />
 }
