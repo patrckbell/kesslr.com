@@ -72,32 +72,6 @@ function PlatformSectionMobile() {
           }}>{block.body}</p>
         </div>
       ))}
-
-      <div style={{ padding: '32px 24px 0' }}>
-        {steps.map((step, i) => (
-          <div
-            key={step.label}
-            style={{
-              padding: '14px 0',
-              borderBottom: i === steps.length - 1 ? 'none' : '1px solid #1d1d1d',
-            }}
-          >
-            <div style={{
-              fontFamily: "'IBM Plex Mono', monospace",
-              fontSize: '15px',
-              lineHeight: 1.3,
-              color: '#c2c2c2',
-            }}>{step.label}</div>
-            <div style={{
-              fontFamily: "'IBM Plex Mono', monospace",
-              fontSize: '13px',
-              lineHeight: 1.4,
-              color: '#5a5a5a',
-              marginTop: '4px',
-            }}>{step.sub}</div>
-          </div>
-        ))}
-      </div>
     </section>
   )
 }
@@ -152,7 +126,7 @@ function PlatformSectionDesktop() {
         }}>
           <p style={{
             fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: 'calc(var(--plat-row-ht) * 0.075)',
+            fontSize: 'calc(var(--plat-row-ht) * 0.065)',
             fontWeight: 300,
             lineHeight: 1.4,
             color: '#AFAFAF',
@@ -160,7 +134,7 @@ function PlatformSectionDesktop() {
           }}>{block.heading}</p>
           <p style={{
             fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: 'calc(var(--plat-row-ht) * 0.06)',
+            fontSize: 'calc(var(--plat-row-ht) * 0.05)',
             lineHeight: 1.55,
             color: '#5a5a5a',
             fontWeight: 300,
