@@ -1,22 +1,1330 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Science+Gothic:wdth,wght@50..200,100..900&family=IBM+Plex+Mono:wght@300;400&display=swap"
-      rel="stylesheet"
-    />
-    <title>Kronus</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kronus — Build with assurance</title>
+<meta name="description" content="Kronus compiles engineering intent into software, tests, and assurance evidence; traceably and deterministically.">
+<meta name="theme-color" content="#E9E8E3">
+<meta property="og:title" content="Kronus — Build with assurance">
+<meta property="og:description" content="Kronus compiles engineering intent into software, tests, and assurance evidence; traceably and deterministically.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* ==========================================================================
+   KRONUS — DOC REF KRN-DS-001 — REV A
+
+   Design language: CONTROLLED DOCUMENT.
+
+   Kronus sells configuration control, traceability and evidence. So the page
+   presents itself as a controlled engineering document: document reference,
+   revision, numbered figures, captions in the caption register, a signature
+   block. The convention is earned by the subject rather than borrowed as a
+   costume.
+
+   Three rules that keep it out of template territory:
+     1. Figures are computed, not decorated. Every mark means something.
+     2. Type contrast is violent — 96px display against 10px mono. No middle.
+     3. The grid is structural and visible, like drawing guides. Never wallpaper.
+   ========================================================================== */
+
+:root{
+  /* --- ground --- */
+  --paper:#E9E8E3;
+  --paper-2:#E3E2DC;
+  --paper-3:#DEDDD6;
+  --ink:#111110;
+  --ink-2:#3A3A36;
+  --ink-3:#6E6D66;
+  --ink-4:#9C9B93;
+  --rule:#C9C8C0;
+  --rule-2:#B6B5AC;
+
+  /* --- field --- */
+  --field:#6600C0;
+  --field-2:#5200A0;
+  --on-field:#F2ECFA;
+  --on-field-dim:#F2ECFA;
+
+  --ink-inv:#0B0B0A;
+  --paper-inv:#EDECE7;
+
+  /* --- type --- */
+  --disp:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+
+  /* --- metrics --- */
+  /* page geometry, all proportional:
+       rails at 10% / 90%  →  an 80% span
+       content 70% wide, centred  →  15% … 85%
+       so the gap from rail to content is 5% a side */
+  --grid-x:10%;      /* rail inset from each edge */
+  --content-w:70%;   /* section content width */
+  --maxw:1240px;     /* legacy cap — no longer applied to .w */
+  --pad:32px;
+  --nav:46px;          /* masthead height — sections subtract it */
+  --rail:26px;
+  --t:180ms cubic-bezier(.2,0,0,1);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:calc(var(--nav) + 8px)}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--mono);font-size:13px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+@media(max-width:820px){:root{--pad:20px}}
+
+.w{width:var(--content-w);max-width:none;margin:0 auto;padding:0}
+@media(max-width:1100px){.w{width:80%}}
+@media(max-width:820px){.w{width:auto;padding:0 var(--pad)}}
+
+/* ==========================================================================
+   TYPE — the contrast is the point
+   ========================================================================== */
+.d1,.d2,.d3{
+  font-family:var(--disp);font-weight:700;
+  letter-spacing:-.045em;line-height:.92;margin:0;
+}
+.d2,.d3{text-wrap:balance}   /* never on the hero — see .hero-h1 */
+.d1{font-size:clamp(3rem,9.2vw,7.5rem)}
+.d2{font-size:clamp(2.1rem,5.4vw,4.25rem);letter-spacing:-.04em}
+.d3{font-size:clamp(1.5rem,2.9vw,2.25rem);letter-spacing:-.035em;line-height:1}
+/* an italic word inside a display heading picks up the field colour */
+.d1 i,.d1 em,.d2 i,.d2 em,.d3 i,.d3 em{
+  font-style:italic;font-weight:500;color:var(--field);
+}
+.field .d1 i,.field .d1 em,.field .d2 i,.field .d2 em{color:#fff}
+.dark .d1 i,.dark .d2 i,.dark .d1 em,.dark .d2 em{color:var(--paper-inv)}
+
+/* ── hero sequence ────────────────────────────────────────────────────────
+   Words rise into place one at a time behind a mask, then the last word
+   cycles: assurance → determinism → traceability → Kronus, and stays.
+
+   The mask is a clip box with a little padding for descenders, pulled back
+   with an equal negative margin so the baseline is unchanged. The flip box
+   has its width and height measured in JS rather than guessed, so it tracks
+   the clamped font size and re-measures once the webfont lands. */
+.wl{
+  display:inline-block;overflow:hidden;vertical-align:bottom;
+  /* headroom inside the clip for descenders AND for italic overhang, each
+     pulled back by an equal negative margin so layout is unchanged. The
+     italic 'with' leans past its advance width and was losing its tail. */
+  padding:0 .1em .09em;
+  margin:0 -.1em -.09em;
+}
+.wi{
+  display:inline-block;transform:translateY(115%);
+  transition:transform 700ms cubic-bezier(.16,1,.3,1);
+  transition-delay:var(--d,0ms);
+}
+/* text-wrap:balance must NOT apply here: it re-runs line breaking whenever
+   the flip box animates its width, which drags the line above around. */
+.hero-h1{text-align:left;text-wrap:wrap}
+.hero-h1.in .wi{transform:none}
+
+.flip{
+  /* Fixed box. As an inline-block its shrink-to-fit width is the max-content
+     of its children — the widest word — so it never resizes and the first
+     letter of the line never moves. Words simply extend different distances
+     into it. Nothing animates here except the vertical translate. */
+  display:inline-block;overflow:hidden;vertical-align:bottom;
+  height:1.06em;
+}
+.flip-track{display:block;transition:transform 660ms cubic-bezier(.16,1,.3,1)}
+.fw{display:block;width:max-content;line-height:1.06}
+
+@media(prefers-reduced-motion:reduce){
+  .wi{transform:none;transition:none}
+  .flip,.flip-track{transition:none}
+}
+
+/* ── annotation register ──────────────────────────────────────────────────
+   Two voices, split by what the text actually is.
+
+   .cap — HUMAN ANNOTATION. Grotesque, uppercase, tightly spaced. This is
+   technical-drawing lettering (ISO 3098 is upright, uppercase and narrow, not
+   tracked out) and it is what Anduril uses for its figure metadata. Tiny
+   wide-tracked uppercase MONO is the most overused label style on the web and
+   reads as generic the moment it appears.
+
+   .data — MACHINE OUTPUT. Mono, natural tracking, lowercase where it would
+   really be lowercase. Document references, hashes, coordinates, counters.
+   Mono earns its place when the string is literally machine-produced. */
+.cap{
+  font-family:var(--disp);font-size:10.5px;font-weight:600;
+  letter-spacing:.055em;text-transform:uppercase;color:var(--ink-3);
+  line-height:1.5;display:block;
+}
+.cap-ink{color:var(--ink)}
+.cap-field{color:var(--field)}
+
+.data{
+  font-family:var(--mono);font-size:10px;font-weight:400;
+  letter-spacing:0;color:var(--ink-3);line-height:1.5;display:block;
+}
+.data-ink{color:var(--ink)}
+
+/* inline link: underline draws left to right */
+.lnk{position:relative;display:inline-block;padding-bottom:2px}
+.lnk::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:currentColor;transform:scaleX(0);transform-origin:left center;
+  transition:transform 300ms cubic-bezier(.2,0,0,1);
+}
+.lnk:hover::after{transform:scaleX(1)}
+@media(prefers-reduced-motion:reduce){.lnk::after{transform:scaleX(1);transition:none}}
+
+p{margin:0 0 1.05em;color:var(--ink-2);max-width:62ch}
+p:last-child{margin-bottom:0}
+.lead{font-size:15px;line-height:1.6;color:var(--ink);max-width:46ch}
+.sm{font-size:12px;line-height:1.7}
+.xs{font-size:11px;line-height:1.7;color:var(--ink-3)}
+a{color:inherit;text-decoration:none}
+strong{font-weight:500;color:var(--ink)}
+hr{border:0;border-top:1px solid var(--rule);margin:0}
+
+/* ==========================================================================
+   DOCUMENT CHROME
+   ========================================================================== */
+.masthead{
+  position:sticky;top:0;z-index:80;background:var(--paper);
+  border-bottom:1px solid var(--ink-4);
+}
+.mast-in{
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  gap:24px;height:var(--nav);
+}
+.brand{display:flex;align-items:center;gap:10px;justify-self:start}
+.brand svg{display:block}
+.brand b{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-.02em}
+/* doc metadata sits right; the nav takes the centre */
+.mast-meta{display:flex;gap:22px;justify-self:end}
+@media(max-width:1080px){.mast-meta{display:none}}
+.mast-nav{display:flex;gap:44px;justify-self:center}
+@media(max-width:900px){.mast-nav{gap:30px}}
+/* nav: underline draws left to right */
+.mast-nav a{
+  font-size:13px;color:var(--ink-2);position:relative;padding-bottom:4px;
+  transition:color var(--t);
+}
+.mast-nav a::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:currentColor;transform:scaleX(0);transform-origin:left center;
+  transition:transform 300ms cubic-bezier(.2,0,0,1);
+}
+.mast-nav a:hover,.mast-nav a[data-on]{color:var(--field)}
+.mast-nav a:hover::after,.mast-nav a[data-on]::after{transform:scaleX(1)}
+@media(max-width:640px){.mast-nav{display:none}}
+
+/* fixed status rail along the bottom — the document's live readout */
+.rail{
+  position:fixed;left:0;right:0;bottom:0;z-index:80;height:var(--rail);
+  background:var(--ink);color:var(--paper);
+  display:flex;align-items:center;
+}
+.rail .w{display:flex;justify-content:space-between;gap:20px;width:100%}
+.rail .cap,.rail .data{color:var(--ink-4)}
+.rail .on{color:var(--paper)}
+@media(max-width:820px){.rail{display:none}}
+@media(max-width:1100px){.tab{left:10%}}
+@media(max-width:820px){.tab{left:var(--pad)}}
+
+/* ==========================================================================
+   SECTION SCAFFOLD — visible structural guides, not wallpaper
+   ========================================================================== */
+section{border-bottom:1px solid var(--ink);position:relative}
+.sec{padding:64px 0 72px}
+@media(max-width:820px){.sec{padding:44px 0 48px}}
+
+/* --- section heights -------------------------------------------------------
+   One screen per section, with three exceptions: platform and demo run long,
+   company runs short. Always min-height, never height — a section that
+   outgrows the viewport grows rather than clipping.
+
+   svh rather than vh so mobile browser chrome does not push content out of
+   frame. Disabled below 820px entirely, where forcing viewport heights either
+   crams the content or leaves dead space. */
+section.h-full,
+section.h-tall{display:flex;flex-direction:column;justify-content:center}
+section.h-full{min-height:calc(100svh - var(--nav))}
+section.h-tall{min-height:calc(126svh - var(--nav))}
+section.h-short .sec{padding:76px 0 86px}
+@media(max-width:820px){section.h-short .sec{padding:52px 0 58px}}
+
+/* The document ends on the last section. It absorbs the fixed rail's height
+   itself so its ground runs behind the rail — reserving that space on the body element
+   left a strip of paper below the final section. */
+section:last-of-type{border-bottom:0}
+section:last-of-type > .sec{padding-bottom:calc(76px + var(--rail))}
+@media(max-width:820px){section:last-of-type > .sec{padding-bottom:56px}}
+
+@supports not (height:100svh){
+  section.h-full{min-height:calc(100vh - var(--nav))}
+  section.h-tall{min-height:calc(126vh - var(--nav))}
+}
+@media(max-width:820px){
+  section.h-full,section.h-tall{min-height:0;display:block}
+}
+
+/* ── rails ───────────────────────────────────────────────────────────────
+   Two hairlines at 10% and 90%, drawn per section rather than once for the
+   page. Sections are contiguous so they read as continuous lines down the
+   whole document — and being inside the section they inherit its colouring,
+   which a single page-level fixed pair could not do across paper, purple
+   and black. */
+.guides{position:absolute;inset:0;pointer-events:none;z-index:0}
+.guides i{position:absolute;top:0;bottom:0;width:1px;background:var(--rule)}
+.guides i:nth-child(1){left:var(--grid-x)}
+.guides i:nth-child(2){right:var(--grid-x)}
+@media(max-width:820px){.guides{display:none}}
+.sec > .w{position:relative;z-index:1}
+
+/* section number tab, top-left, sitting on the rule like a drawing callout */
+.tab{
+  position:absolute;top:0;left:15%;z-index:2;
+  background:var(--ink);color:var(--paper);
+  padding:5px 10px 4px;
+}
+.tab .cap,.tab .data{color:var(--paper)}
+.field .tab .data{color:var(--field)}
+.dark .tab .data{color:var(--ink-inv)}
+
+/* header block stacks: kicker, heading, then the supporting line beneath */
+.head{margin-bottom:38px}
+.head > div + div{margin-top:22px}
+.head .cap{margin-bottom:12px}
+/* The supporting line under a section heading runs the full content width.
+   It is two or three sentences, so the long measure reads as a standfirst
+   rather than as body copy. */
+.head p{max-width:none}
+
+/* ==========================================================================
+   FIELD SECTIONS — the bold moments
+   ========================================================================== */
+.field{background:var(--field);color:var(--on-field);border-bottom-color:var(--field-2)}
+.field p{color:var(--on-field-dim);max-width:58ch}
+/* .field p and .head p have equal specificity, so the later one wins and the
+   58ch cap was beating the standfirst rule on every field section. Raised
+   above both rather than reordering, which would be fragile. */
+.field .head p,.dark .head p{max-width:none}
+.field .cap{color:var(--on-field-dim)}
+.field .cap-ink{color:var(--on-field)}
+/* .data had no field or dark override, so machine-output labels rendered in
+   ink grey straight onto the purple. */
+.field .data{color:var(--on-field)}
+.field .data-ink{color:#fff}
+.field .tab{background:var(--on-field)}
+.field .tab .cap{color:var(--field)}
+.field .guides i{background:rgba(242,236,250,.16)}
+.field hr{border-top-color:rgba(242,236,250,.24)}
+.field .lead{color:var(--on-field)}
+
+.dark{background:var(--ink-inv);color:var(--paper-inv);border-bottom-color:var(--ink)}
+.dark p{color:var(--ink-4)}
+.dark .cap{color:var(--ink-4)}
+.dark .cap-ink{color:var(--paper-inv)}
+.dark .data{color:var(--ink-4)}
+.dark .data-ink{color:var(--paper-inv)}
+.dark .tab{background:var(--paper-inv)}
+.dark .tab .cap{color:var(--ink-inv)}
+.dark .guides i{background:rgba(237,236,231,.12)}
+
+/* ==========================================================================
+   FIGURES — large, numbered, captioned in the Anduril register
+   ========================================================================== */
+figure{margin:0}
+.fig{border:1px solid var(--ink);background:var(--paper-2)}
+.fig-face{position:relative;overflow:hidden;background:var(--paper-2)}
+.fig-face svg,.fig-face canvas{display:block;width:100%;height:auto}
+.fig-cap{
+  border-top:1px solid var(--ink);
+  display:grid;grid-template-columns:auto 1fr auto;gap:20px;
+  padding:9px 12px;align-items:baseline;
+}
+@media(max-width:640px){.fig-cap{grid-template-columns:1fr;gap:4px}}
+.fig-note{padding:12px;border-top:1px solid var(--rule)}
+/* placeholder control: looks live so the page reads finished, but has no
+   href yet, so no pointer cursor promising a destination */
+.btn-off{cursor:default}
+
+/* figure marks */
+.fx-ink{stroke:var(--ink);stroke-width:1;fill:none}
+.fx-thin{stroke:var(--rule-2);stroke-width:1;fill:none}
+.fx-field{stroke:var(--field);stroke-width:1.4;fill:none}
+.fx-dot{fill:var(--ink)}
+.fx-dot-f{fill:var(--field)}
+.fx-fill{fill:var(--ink)}
+.fx-soft{fill:var(--rule)}
+.fx-t{font-family:var(--mono);font-size:8px;fill:var(--ink-3);letter-spacing:.01em}
+.fx-tf{font-family:var(--mono);font-size:8px;fill:var(--field);letter-spacing:.01em}
+
+/* ==========================================================================
+   COMPONENTS
+   ========================================================================== */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:11px 18px;font-family:var(--disp);font-size:11.5px;font-weight:600;
+  letter-spacing:.045em;text-transform:uppercase;
+  border:1px solid var(--ink);color:var(--ink);
+  background-color:transparent;
+  background-image:linear-gradient(var(--ink),var(--ink));
+  background-repeat:no-repeat;background-position:left center;
+  background-size:0% 100%;
+  transition:background-size 340ms cubic-bezier(.2,0,0,1),color 200ms linear;
+}
+.btn:hover{background-size:100% 100%;color:var(--paper)}
+
+.btn-f{
+  background-color:var(--field);border-color:var(--field);color:#fff;
+  background-image:linear-gradient(var(--ink),var(--ink));
+}
+.btn-f:hover{color:#fff}
+
+.field .btn{
+  border-color:var(--on-field);color:var(--on-field);
+  background-image:linear-gradient(var(--on-field),var(--on-field));
+}
+.field .btn:hover{color:var(--field)}
+
+.dark .btn{
+  border-color:var(--paper-inv);color:var(--paper-inv);
+  background-image:linear-gradient(var(--paper-inv),var(--paper-inv));
+}
+.dark .btn:hover{color:var(--ink-inv)}
+
+@media(prefers-reduced-motion:reduce){
+  .btn{transition:background-color var(--t),color var(--t)}
+  .btn:hover{background-color:var(--ink);background-size:0% 100%}
+  .mast-nav a::after{transition:none}
+}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+
+/* data rows — the assurance table, the backer strip */
+.rows{border-top:1px solid var(--ink)}
+.row{
+  display:grid;grid-template-columns:8ch 1fr 2fr;gap:24px;
+  padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline;
+}
+@media(max-width:640px){.row{grid-template-columns:6ch 1fr;gap:12px}.row .r3{grid-column:1/-1}}
+.row .r2{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:-.02em}
+.row:hover{background:var(--paper-3)}
+.field .row:hover{background:rgba(242,236,250,.07)}
+.field .row{border-bottom-color:rgba(242,236,250,.2)}
+.field .rows{border-top-color:var(--on-field)}
+
+/* three-column editorial block */
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--ink)}
+@media(max-width:820px){.tri{grid-template-columns:1fr}}
+.tri > div{padding:20px 24px 26px;border-right:1px solid var(--rule)}
+.tri > div:last-child{border-right:0}
+@media(max-width:820px){.tri > div{border-right:0;border-bottom:1px solid var(--rule)}}
+.tri .cap{margin-bottom:14px}
+
+/* FAQ */
+.faq{border-top:1px solid var(--ink)}
+details{border-bottom:1px solid var(--rule)}
+summary{
+  list-style:none;cursor:pointer;padding:15px 40px 15px 0;position:relative;
+  font-family:var(--disp);font-weight:500;font-size:15px;letter-spacing:-.02em;
+  transition:color var(--t);
+}
+summary::-webkit-details-marker{display:none}
+summary:hover,details[open] summary{color:var(--field)}
+summary::after{
+  content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:15px;color:var(--ink-3);transition:var(--t);
+}
+details[open] summary::after{content:"\2212";color:var(--field)}
+.ans{padding:0 0 18px;max-width:64ch}
+.ans p{font-size:12px;line-height:1.75}
+
+/* team */
+.crew{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--ink);margin-top:8px}
+@media(max-width:820px){.crew{grid-template-columns:1fr 1fr}}
+@media(max-width:460px){.crew{grid-template-columns:1fr}}
+.crew > div{padding:26px 22px 30px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.crew > div:last-child{border-right:0}
+.crew .nm{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:-.02em;display:block;margin-bottom:7px}
+
+/* demo slot */
+.slot{border:1px solid var(--ink);background:var(--paper-2)}
+.slot-face{position:relative;aspect-ratio:16/9;min-height:min(58svh,520px);display:grid;place-items:center;overflow:hidden}
+.slot-face canvas{position:absolute;inset:0;width:100%;height:100%}
+.slot-mid{position:relative;z-index:2;display:grid;justify-items:center;gap:16px}
+.play{
+  width:62px;height:62px;border:1px solid var(--ink);display:grid;place-items:center;
+  background:var(--paper);transition:background var(--t),color var(--t);
+}
+.slot-face:hover .play{background:var(--field);border-color:var(--field);color:#fff}
+
+/* ── writeup blocks ───────────────────────────────────────────────────────
+   Prose-forward, after Etched: a named subhead, a real measure of text, and
+   the figure underneath rather than beside it. The text carries the argument;
+   the figure confirms it. */
+.wu{border-top:1px solid var(--rule);padding-top:38px;margin-top:54px}
+.field .wu,.dark .wu{border-top-color:rgba(255,255,255,.22)}
+.wu-head{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:baseline;margin-bottom:22px}
+@media(max-width:560px){.wu-head{grid-template-columns:1fr;gap:8px}}
+.wu h3{
+  font-family:var(--disp);font-weight:600;letter-spacing:-.025em;
+  font-size:clamp(1.05rem,1.8vw,1.4rem);line-height:1.15;
+}
+.wu-body{max-width:68ch}
+/* A writeup block whose body introduces a table rather than carrying the
+   argument. It runs the full width so it lines up with what follows. */
+.wu-body.wide{max-width:none}
+
+/* Secondary standards. Compact and evenly weighted, so the set reads as a
+   list of profiles over one model rather than as a ranking. */
+/* ── platform panels ─────────────────────────────────────────────────────
+   Four capabilities as a 2x2 grid rather than four stacked writeups. Each
+   panel is a small computed diagram over about 35 words, which is denser
+   than prose and much shorter than the figures this replaced. */
+.pgrid{display:grid;grid-template-columns:1fr 1fr}
+@media(max-width:820px){.pgrid{grid-template-columns:1fr}}
+.pnl{
+  padding:26px 30px 30px 0;border-bottom:1px solid var(--rule);
+  display:flex;flex-direction:column;
+}
+.pnl:nth-child(2n-1){border-right:1px solid var(--rule)}
+.pnl:nth-child(2n){padding-right:0;padding-left:30px}
+.pnl:nth-child(-n+2){padding-top:0}
+.pnl:nth-last-child(-n+2){border-bottom:0;padding-bottom:0}
+@media(max-width:820px){
+  .pnl,.pnl:nth-child(2n){padding:26px 0 30px}
+  .pnl:nth-child(2n-1){border-right:0}
+  .pnl:first-child{padding-top:0}
+  .pnl:nth-last-child(-n+2){border-bottom:1px solid var(--rule);padding-bottom:26px}
+  .pnl:last-child{border-bottom:0;padding-bottom:0}
+}
+.pnl-hd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:16px}
+.pnl-art{padding:4px 0 0;margin-bottom:20px}
+.pnl-art svg{display:block;width:100%;height:auto}
+.pnl h3{
+  font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:-.02em;
+  margin:0 0 8px;
+}
+.pnl p{font-size:12px;line-height:1.7;margin:0;max-width:none;color:var(--ink-2)}
+
+.stds{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--rule);margin-top:12px;
+}
+@media(max-width:820px){.stds{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.stds{grid-template-columns:1fr}}
+.stds > div{padding:14px 20px 16px 0;border-bottom:1px solid var(--rule)}
+.stds .k{
+  font-family:var(--disp);font-weight:600;font-size:13px;
+  letter-spacing:-.01em;display:block;margin-bottom:3px;
+}
+.stds .v{font-size:11px;line-height:1.55;color:var(--ink-3);display:block}
+.field .stds{border-top-color:rgba(242,236,250,.3)}
+.field .stds > div{border-bottom-color:rgba(242,236,250,.22)}
+.field .stds .v{color:var(--on-field-dim)}
+.sub-lbl{margin:34px 0 0}
+.field .wu-body.wide p,.dark .wu-body.wide p,.wu-body.wide p{max-width:none}
+.wu-body p{font-size:13.5px;line-height:1.85;margin-bottom:1.2em}
+.wu figure,.wu .fig{margin-top:30px}
+
+/* prose left, figure right. The figure sits inside the column rather than
+   under it, loses its panel, and on a field section is drawn in the field's
+   own ink — so it reads as part of the page instead of an image dropped on
+   top of it. */
+.wu-split{display:grid;grid-template-columns:1fr minmax(0,50%);gap:52px;align-items:start}
+@media(max-width:1000px){.wu-split{grid-template-columns:1fr;gap:34px}}
+.wu-split .wu-body{max-width:50ch}
+/* The figure is taller than the prose beside it. Rather than shrinking it,
+   the subhead moves into the left column and the figure is pulled up level
+   with the block's top rule, so the extra height is taken above the text
+   instead of hanging below it. --fig-pull is the one number to tune. */
+.wu-split{--fig-pull:38px}
+.wu-split > figure{margin-top:calc(-1 * var(--fig-pull))}
+@media(max-width:1000px){.wu-split > figure{margin-top:0}}
+
+.fig-side{border:0;background:transparent}
+.fig-side .fig-hd{
+  display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+  padding-bottom:8px;border-bottom:1px solid currentColor;margin-bottom:16px;
+}
+.fig-side .fig-face{background:transparent;border:0;padding:0}
+
+/* figure marks drawn onto the purple field */
+.fx-area{fill:var(--field);opacity:.1}
+.field .fx-ink,.field .fx-box{stroke:var(--on-field)}
+.field .fx-thin{stroke:rgba(242,236,250,.3)}
+.field .fx-field{stroke:#fff}
+.field .fx-dot,.field .fx-fill{fill:var(--on-field)}
+.field .fx-dot-f{fill:#fff}
+.field .fx-soft{fill:rgba(242,236,250,.22)}
+.field .fx-t{fill:var(--on-field-dim)}
+.field .fx-tf{fill:#fff}
+.field .fx-area{fill:#fff;opacity:.14}
+
+/* reveal */
+.js .rv{opacity:0;transform:translateY(10px);transition:opacity .5s cubic-bezier(.2,0,0,1),transform .5s cubic-bezier(.2,0,0,1)}
+.js .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .js .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+.todo{
+  display:inline-block;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:#B4531F;border:1px solid #B4531F;padding:1px 5px;margin-left:7px;vertical-align:middle;
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════ MASTHEAD ══════════════════════════════ -->
+<header class="masthead">
+  <div class="w mast-in">
+    <a class="brand" href="#top" aria-label="Kronus">
+      <svg width="26" height="16" viewBox="0 0 50 30" aria-hidden="true">
+        <rect y="25" width="20" height="5" fill="currentColor"/>
+        <rect x="20" y="5" width="20" height="5" transform="rotate(90 20 5)" fill="currentColor"/>
+        <rect width="20" height="5" transform="matrix(-1 0 0 1 50 25)" fill="currentColor"/>
+        <rect width="20" height="5" transform="matrix(0 1 1 0 30 5)" fill="currentColor"/>
+        <rect x="35" y="5" width="20" height="5" transform="rotate(180 35 5)" fill="currentColor"/>
+      </svg>
+      <b>KRONUS</b>
+    </a>
+    <nav class="mast-nav" id="nav">
+      <a href="#s01">/why</a>
+      <a href="#s02">/platform</a>
+      <a href="#s03">/demo</a>
+      <a href="#s05">/contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════════════════════════════ HERO ══════════════════════════════ -->
+<section id="top" class="h-full" data-n="00">
+  <div class="guides" aria-hidden="true"><i></i><i></i></div>
+  <div class="w sec" style="padding-top:78px">
+    <div style="display:grid;grid-template-columns:1fr;gap:34px">
+      <div>
+        <h1 class="d1 hero-h1" id="hero-h1">
+          <span class="wl" style="--d:0ms"><span class="wi">Build</span></span>
+          <span class="wl" style="--d:120ms"><span class="wi"><i>with</i></span></span><br>
+          <span class="wl" style="--d:250ms"><span class="wi"><span class="flip" id="flip"><span class="flip-track" id="flip-track"><span class="fw">assurance.</span><span class="fw">determinism.</span><span class="fw">traceability.</span><span class="fw">Kronus.</span></span></span></span></span>
+        </h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ 01 — WHAT ══════════════════════════════ -->
+<!-- ══════════════════════════════ 01 — WHY ══════════════════════════════ -->
+<section id="s01" class="field h-tall" data-n="01">
+  <span class="tab"><span class="cap">01</span></span>
+  <div class="guides" aria-hidden="true"><i></i><i></i></div>
+  <div class="w sec">
+    <div class="head rv">
+      <div>
+        <span class="cap">Why Kronus</span>
+        <h2 class="d2">Writing the software was never the&nbsp;bottleneck.</h2>
+      </div>
+      <div>
+        <p class="sm">
+          Critical systems are increasingly software-defined. Software is faster to
+          write than the hardware it replaced, and coding tools have raised that rate
+          again. 
+          Writing it is not the constraint. Showing that it does what the system
+          requires, with evidence a certification authority will accept, takes longer
+          than writing it. That gap is widening.
+        </p>
+      </div>
+    </div>
+
+    <div class="wu rv">
+      <div class="wu-split">
+      <div>
+      <div class="wu-head">
+        <h3>Software ate the system</h3>
+      </div>
+      <div class="wu-body">
+        <p>
+          When these workflows were conceived, software was small, static, and bounded.
+          The F-4A Phantom II carried on the order of a thousand lines of onboard code,
+          and around 8% of its functions were performed in software. Everything else was
+          mechanism, hydraulics, and analogue circuitry. All of it could be inspected,
+          bench-tested, and reasoned about physically.
+        </p>
+        <p>
+          Today, the F-35 carries
+          roughly 8 million lines of code onboard with about 24 million more in the
+          ground systems that keep it flying. The aircraft became a machine whose behaviour 
+          is almost entirely expressed in software.
+        </p>
+        <p>
+          The tools for writing that software improved by orders of magnitude. The
+          way intent is captured, how it becomes an
+          implementation, how that implementation is shown to be correct has not
+          meaningfully changed. And the gap widens every year.
+        </p>
+      </div>
+      </div>
+      <figure class="fig fig-side">
+        <div class="fig-hd">
+          <span class="data">Onboard software, combat aircraft</span>
+        </div>
+        <div class="fig-face" id="fig-growth" data-fig="growth"></div>
+      </figure>
+      </div>
+    </div>
+
+    <div class="wu rv">
+      <div class="wu-head">
+        <h3>Where the old workflow breaks</h3>
+      </div>
+
+      <div class="rows" style="margin-top:24px">
+        <div class="row">
+          <span class="cap">01</span>
+          <span class="r2">Intent is scattered, translation is manual</span>
+          <span class="r3 sm">Requirements, interface documents, spreadsheets, and models hold the intent. Engineers convert it into code, tests, and documentation by hand, then repeat the conversion whenever something changes.</span>
+        </div>
+        <div class="row">
+          <span class="cap">02</span>
+          <span class="r2">Assumptions and evidence drift apart</span>
+          <span class="r3 sm">Assumptions are revised and evidence accumulates across a programme. Artefacts produced against an earlier configuration stay in the record and give no signal that they are stale.</span>
+        </div>
+        <div class="row">
+          <span class="cap">03</span>
+          <span class="r2">Certification is treated as the last step</span>
+          <span class="r3 sm">Certification constrains a design as tightly as mass or power. If the system cannot fly until it is certified, the objectives are a design input. Deferring them moves architectural problems to the point where rework is most expensive.</span>
+        </div>
+        <div class="row">
+          <span class="cap">04</span>
+          <span class="r2">Verification is unrepresentative</span>
+          <span class="r3 sm">Test environments rarely match the target. Hardware arrives late and rigs approximate it, so behaviour specific to the real system first appears at integration.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ 02 — HOW IT WORKS ═══════════════════════ -->
+<section id="s02" class="h-tall" data-n="02">
+  <span class="tab"><span class="cap">02</span></span>
+  <div class="guides" aria-hidden="true"><i></i><i></i></div>
+  <div class="w sec">
+    <div class="head rv">
+      <div>
+        <span class="cap">How it works</span>
+        <h2 class="d2">One pass, intent to&nbsp;evidence.</h2>
+      </div>
+      <div>
+        <p class="sm">
+          Kronus runs a single pass from source artefacts to an evidenced system. Every
+          output is bound to the configuration that produced it.
+        </p>
+      </div>
+    </div>
+
+    <div class="pgrid rv">
+
+      <div class="pnl">
+        <div class="pnl-hd"><span class="cap">01 / Capture</span></div>
+        <div class="pnl-art" id="fig-capture"></div>
+        <h3>Read intent from existing artefacts</h3>
+        <p>
+          Kronus reads the requirements, interface documents, and design data a
+          programme already holds. No migration step, and no new modelling language to
+          adopt first. Conflicting sources are reported rather than silently reconciled.
+        </p>
+      </div>
+
+      <div class="pnl">
+        <div class="pnl-hd"><span class="cap">02 / Specify</span></div>
+        <div class="pnl-art" id="fig-spec"></div>
+        <h3>Compile intent into a checkable specification</h3>
+        <p>
+          States, interfaces, contracts, and timing become explicit and machine-checkable
+          before any implementation exists. The specification reports conflicting
+          requirements, unreachable states, and timing with no satisfying schedule.
+        </p>
+      </div>
+
+      <div class="pnl">
+        <div class="pnl-hd"><span class="cap">03 / Generate</span></div>
+        <div class="pnl-art" id="fig-gen"></div>
+        <h3>Generate implementation and evidence together</h3>
+        <p>
+          One specification produces the source, the tests, the documentation, and the
+          trace links back to intent, in a single pass. Every output carries a
+          configuration identity, so evidence cannot drift from the build that made it.
+        </p>
+      </div>
+
+      <div class="pnl">
+        <div class="pnl-hd"><span class="cap">04 / Execute</span></div>
+        <div class="pnl-art" id="fig-exec"></div>
+        <h3>Execute inside deterministic bounds</h3>
+        <p>
+          Generated software runs on an execution model Kronus designs and controls.
+          Static scheduling, explicit ordering, no dynamic allocation, no cache. Timing
+          becomes a property of the architecture, not a measurement taken at the end.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- ── evidence / standards ── -->
+    <div class="wu rv">
+      <div class="wu-head">
+        <span class="cap">05 / Evidence</span>
+        <h3>Built for the standards that matter</h3>
+      </div>
+      <div class="wu-body wide">
+        <p>
+          Kronus is organised around certification objectives rather than around code
+          that gets certified afterwards. The evidence model is common to every
+          standard.
+        </p>
+      </div>
+
+      <span class="cap sub-lbl">Primary target</span>
+      <div class="rows" style="margin-top:12px">
+        <div class="row">
+          <span class="cap">DO&#8288;-&#8288;178C</span>
+          <span class="r2">Airborne software</span>
+          <span class="r3 sm">The objective set the platform is built against.</span>
+        </div>
+        <div class="row">
+          <span class="cap">DO&#8288;-&#8288;330</span>
+          <span class="r2">Tool qualification</span>
+          <span class="r3 sm">How generated output earns credit.</span>
+        </div>
+        <div class="row">
+          <span class="cap">DO&#8288;-&#8288;331</span>
+          <span class="r2">Model-based supplement</span>
+          <span class="r3 sm">Where the specification carries verification weight.</span>
+        </div>
+        <div class="row">
+          <span class="cap">DO&#8288;-&#8288;333</span>
+          <span class="r2">Formal methods supplement</span>
+          <span class="r3 sm">Where sound analysis replaces categories of test.</span>
+        </div>
+        <div class="row">
+          <span class="cap">A(M)C&nbsp;20&#8288;-&#8288;193</span>
+          <span class="r2">Multi-core processors</span>
+          <span class="r3 sm">Where interference between cores has to be identified and bounded.</span>
+        </div>
+      </div>
+
+      <span class="cap sub-lbl">Designed to extend to</span>
+      <div class="stds">
+        <div><span class="k">IEC 61508</span><span class="v">Industrial functional safety</span></div>
+        <div><span class="k">ISO 26262</span><span class="v">Road vehicles</span></div>
+        <div><span class="k">EN 5012x</span><span class="v">Rail</span></div>
+        <div><span class="k">IEC 62304</span><span class="v">Medical device software</span></div>
+        <div><span class="k">MIL&#8288;-&#8288;STD&#8288;-&#8288;882</span><span class="v">Defence system safety</span></div>
+        <div><span class="k">IEC 61513</span><span class="v">Nuclear instrumentation</span></div>
+      </div>
+
+      <p class="xs" style="margin-top:22px;max-width:70ch">
+        Kronus is not, and does not replace, a certification authority.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ 03 — DEMO ══════════════════════════════ -->
+<section id="s03" class="dark h-tall" data-n="03">
+  <span class="tab"><span class="cap">03</span></span>
+  <div class="guides" aria-hidden="true"><i></i><i></i></div>
+  <div class="w sec">
+    <div class="head rv">
+      <div>
+        <span class="cap">Demonstration</span>
+        <h2 class="d2">Watch the demo.</h2>
+      </div>
+    </div>
+
+    <div class="slot rv" style="border-color:var(--paper-inv);background:transparent">
+      <div class="slot-face">
+        <canvas id="slot-canvas" data-fig="slotfield"></canvas>
+        <div class="slot-mid">
+          <div class="play" style="background:transparent;border-color:var(--paper-inv);color:var(--paper-inv)">
+            <svg width="16" height="18" viewBox="0 0 16 18" aria-hidden="true">
+              <path d="M2 1.5 L14 9 L2 16.5 Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="cap">Walkthrough. Recording in preparation.</span>
+          <span class="cap">Come back soon.</span>
+        </div>
+      </div>
+      <div class="fig-cap" style="border-top:1px solid var(--paper-inv);grid-template-columns:1fr auto">
+        <span class="cap"></span>
+        <a class="cap cap-ink lnk" href="mailto:info@kronus.io?subject=Kronus%20%E2%80%94%20live%20walkthrough">Request a live walkthrough &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ 04 — COMPANY ══════════════════════════ -->
+<section id="s04" class="h-short" data-n="04">
+  <span class="tab"><span class="cap">04</span></span>
+  <div class="guides" aria-hidden="true"><i></i><i></i></div>
+  <div class="w sec">
+    <div class="head rv">
+      <div>
+        <h2 class="d2">The team.</h2>
+      </div>
+    </div>
+
+    <div class="crew rv">
+      <div><span class="nm">Patrick Bellamy</span><span class="cap">Co-founder &amp; CEO</span></div>
+      <div><span class="nm">Jack Ulbrich-Baker</span><span class="cap">Co-founder &amp; CTO</span></div>
+      <div><span class="nm">Kavya Rangaswamy</span><span class="cap">Founding engineer</span></div>
+      <div><span class="nm">Edward Holmes</span><span class="cap">Founding engineer</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ 05 — CONTACT (FIELD) ══════════════════ -->
+<section id="s05" class="field h-full" data-n="05">
+  <span class="tab"><span class="cap">05</span></span>
+  <div class="guides" aria-hidden="true"><i></i><i></i></div>
+  <div class="w sec" style="padding-top:80px">
+    <span class="cap rv" style="margin-bottom:26px">Partner with us</span>
+    <h2 class="d2 rv" style="max-width:16ch">Systems built for the future need workflows built for them.</h2>
+    <div class="rv" style="margin-top:40px">
+      <div class="btns" style="margin-top:30px">
+        <a class="btn" href="mailto:info@kronus.io?subject=Kronus">Contact &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ==========================================================================
+   KRONUS — figures and behaviour.  No dependencies.
+
+   Every figure here is COMPUTED. Nothing is hand-placed decoration: the
+   scatter is a seeded field, the lattice is a real grid, the schedule is a
+   repeating frame, the fan-out is a resolved tree. That is the difference
+   between a technical drawing and a picture of one.
+
+   Randomness is seeded so the page is identical on every load. A figure that
+   reshuffles on refresh is an ornament; a figure that doesn't is a document.
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Only hide .rv content once we know the script is running. If anything
+     below throws, the page stays readable instead of going blank. */
+  document.documentElement.classList.add('js');
+
+  /* Each init step is isolated: a failure in one figure must not stop the
+     reveal from running. */
+  function guard(fn) {
+    try { fn(); } catch (e) { if (window.console) console.error('[kronus]', e); }
+  }
+
+  /* -------------------------------------------------- seeded RNG (mulberry32) */
+  function rng(seed) {
+    return function () {
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  /* -------------------------------------------------------------- svg helpers */
+  function svg(vb) {
+    var s = document.createElementNS(NS, 'svg');
+    s.setAttribute('viewBox', vb);
+    s.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    return s;
+  }
+  /* Anything that is also a CSS property has to go through the style
+     attribute, not a presentation attribute. Presentation attributes sit at
+     the very bottom of the cascade — below any stylesheet rule — so a
+     font-size="11.5" on a .fx-t element loses to .fx-t{font-size:8px} every
+     time, silently. Inline style wins, which is what we want for a per-call
+     override of a class default. */
+  var CSSPROP = {
+    'font-size': 1, 'font-family': 1, 'font-weight': 1, 'font-style': 1,
+    'letter-spacing': 1, 'text-anchor': 1, 'fill': 1, 'fill-opacity': 1,
+    'stroke': 1, 'stroke-width': 1, 'stroke-dasharray': 1,
+    'stroke-linecap': 1, 'stroke-linejoin': 1, 'opacity': 1
+  };
+  function el(tag, attrs, cls) {
+    var n = document.createElementNS(NS, tag), css = '';
+    for (var k in attrs) {
+      if (CSSPROP[k]) css += k + ':' + attrs[k] + ';';
+      else n.setAttribute(k, attrs[k]);
+    }
+    if (cls) n.setAttribute('class', cls);
+    if (css) n.setAttribute('style', css);
+    return n;
+  }
+  function txt(x, y, s, cls, extra) {
+    var a = { x: x, y: y };
+    if (extra) for (var k in extra) a[k] = extra[k];
+    var t = el('text', a, cls || 'fx-t');
+    t.textContent = s;
+    return t;
+  }
+  function add(p) {
+    for (var i = 1; i < arguments.length; i++) p.appendChild(arguments[i]);
+    return p;
+  }
+
+  /* ==========================================================================
+     FIG.01 — SOFTWARE GROWTH IN COMBAT AIRCRAFT
+
+     Portrait, for a narrow column beside prose. Linear, not log: a log axis
+     would flatter the early aircraft into legibility and hide the shape.
+
+     Labels are keyed rather than placed on the plot. At this width the
+     F-16A and F-16D points sit ~75px apart and any inline label collides —
+     and a numbered key is the convention a drawing would use anyway.
+
+     Sourcing is mixed and stated on the figure. The B-2 is deliberately
+     excluded: the circulating figure (~5M, late 90s) exceeds the F-22 and
+     comes from a different counting basis, so it would break the series.
+     ========================================================================== */
+  function figGrowth(host) {
+    var W = 560, H = 530, s = svg('0 0 ' + W + ' ' + H);
+    var L = 56, R = 542, T = 56, B = 296;
+    var MAX = 8.6e6;
+
+    function y(loc) { return B - (loc / MAX) * (B - T); }
+    function x(yr) { return L + (yr - 1958) / (2022 - 1958) * (R - L); }
+
+    for (var v = 0; v <= 8e6; v += 2e6) {
+      var yy = y(v);
+      if (v) add(s, el('path', { d: 'M' + L + ' ' + yy + ' H' + R, opacity: .55 }, 'fx-thin'));
+      add(s, txt(L - 46, yy + 3, v === 0 ? '0' : (v / 1e6) + 'M', 'fx-t', { 'font-size': 10 }));
+    }
+    add(s, el('path', { d: 'M' + L + ' ' + T + ' V' + B + ' H' + R }, 'fx-ink'));
+    [1960, 1980, 2000, 2020].forEach(function (yr) {
+      add(s, el('path', { d: 'M' + x(yr) + ' ' + B + ' V' + (B + 6) }, 'fx-ink'));
+      add(s, txt(x(yr) - 11, B + 20, String(yr), 'fx-t', { 'font-size': 10 }));
+    });
+    add(s, txt(L - 46, T - 16, 'LINES OF ONBOARD SOFTWARE', 'fx-t',
+      { 'font-size': 9, 'font-family': 'var(--disp)', 'font-weight': 600 }));
+
+    var pts = [
+      { yr: 1961, loc: 1000,    n: 'F-4A Phantom II',   a: '~1,000' },
+      { yr: 1978, loc: 135000,  n: 'F-16A',             a: '~135,000' },
+      { yr: 1988, loc: 236000,  n: 'F-16D',             a: '~236,000' },
+      { yr: 2005, loc: 1700000, n: 'F-22 Raptor',       a: '~1.7M' },
+      { yr: 2015, loc: 8000000, n: 'F-35 Lightning II', a: '~8M' }
+    ];
+
+    var d = 'M' + x(pts[0].yr) + ' ' + y(pts[0].loc);
+    pts.forEach(function (pt, i) { if (i) d += 'L' + x(pt.yr) + ' ' + y(pt.loc); });
+    add(s, el('path', {
+      d: d + 'L' + x(pts[4].yr) + ' ' + B + 'L' + x(pts[0].yr) + ' ' + B + 'Z'
+    }, 'fx-area'));
+    add(s, el('path', { d: d, 'stroke-width': 1.8 }, 'fx-field'));
+
+    pts.forEach(function (pt, i) {
+      var px = x(pt.yr), py = y(pt.loc);
+      add(s, el('circle', { cx: px, cy: py, r: 3.6 }, 'fx-dot-f'));
+      add(s, txt(px, py - 11, String(i + 1), 'fx-tf',
+        { 'font-size': 9.5, 'text-anchor': 'middle', 'font-family': 'var(--disp)', 'font-weight': 600 }));
+    });
+    /* ── key ──
+       Runs the full width of the figure rather than the plot area: it starts
+       at the y-axis label column and finishes at the right edge, so it reads
+       as the base of the drawing rather than an indented caption. */
+    var KX0 = L - 46, KX1 = W - 10, KY = 380, RH = 30;
+
+    add(s, el('path', { d: 'M' + KX0 + ' ' + (KY - 26) + ' H' + KX1 }, 'fx-ink'));
+    add(s, txt(KX0, KY - 35, 'KEY', 'fx-t',
+      { 'font-size': 10, 'font-family': 'var(--disp)', 'font-weight': 600, 'letter-spacing': '.14em' }));
+
+    pts.forEach(function (pt, i) {
+      var ry = KY + i * RH;
+      add(s, txt(KX0, ry, String(i + 1), 'fx-tf',
+        { 'font-size': 11, 'font-family': 'var(--disp)', 'font-weight': 600 }));
+      add(s, txt(KX0 + 28, ry, pt.n, 'fx-t',
+        { 'font-size': 11.5, 'font-family': 'var(--disp)', 'font-weight': 600 }));
+      add(s, txt(KX1 - 112, ry, String(pt.yr), 'fx-t', { 'font-size': 10.5, 'text-anchor': 'end' }));
+      add(s, txt(KX1, ry, pt.a, 'fx-t', { 'font-size': 10.5, 'text-anchor': 'end' }));
+      add(s, el('path', { d: 'M' + KX0 + ' ' + (ry + 11) + ' H' + KX1, opacity: .45 }, 'fx-thin'));
+    });
+
+    host.appendChild(s);
+  }
+
+  /* ── panel diagrams ───────────────────────────────────────────────────────
+     One system in four states, not four drawings. Every panel works the same
+     5x3 arrangement of cells: scattered, resolved, generated from, scheduled.
+     No text inside any of them; the heading beside the panel carries the
+     meaning. Around a dozen marks each, which is the density Prime Intellect
+     and Anduril actually run. The previous set had up to 31 marks plus
+     internal labels, which is what read as busy.
+     ────────────────────────────────────────────────────────────────────────── */
+  var PW = 300, PH = 132, PC = 5, PR = 3;          /* panel + cell grid */
+  function cx(i) { return 46 + i * 52; }
+  function cy(j) { return 30 + j * 36; }
+
+  function figCapture(host) {
+    var s = svg('0 0 ' + PW + ' ' + PH), r = rng(1461);
+    var pts = [];
+    for (var j = 0; j < PR; j++) for (var i = 0; i < PC; i++) {
+      pts.push([cx(i) + (r() - .5) * 30, cy(j) + (r() - .5) * 24, 2 + r() * 2.4]);
+    }
+    for (var k = 0; k < pts.length; k += 3) {
+      var q = pts[(k + 4) % pts.length];
+      add(s, el('path', {
+        d: 'M' + pts[k][0].toFixed(1) + ' ' + pts[k][1].toFixed(1) +
+           'L' + q[0].toFixed(1) + ' ' + q[1].toFixed(1), opacity: .4
+      }, 'fx-thin'));
+    }
+    pts.forEach(function (q) {
+      add(s, el('circle', { cx: q[0].toFixed(1), cy: q[1].toFixed(1), r: q[2].toFixed(1) }, 'fx-dot'));
+    });
+    host.appendChild(s);
+  }
+
+  function figSpec(host) {
+    var s = svg('0 0 ' + PW + ' ' + PH);
+    for (var j = 0; j < PR; j++) {
+      add(s, el('path', { d: 'M' + cx(0) + ' ' + cy(j) + ' H' + cx(PC - 1) }, 'fx-thin'));
+    }
+    for (var i = 0; i < PC; i++) {
+      add(s, el('path', { d: 'M' + cx(i) + ' ' + cy(0) + ' V' + cy(PR - 1) }, 'fx-thin'));
+    }
+    var path = [[0, 1], [1, 0], [2, 2], [3, 1], [4, 0]];
+    var d = '';
+    path.forEach(function (c, n) { d += (n ? 'L' : 'M') + cx(c[0]) + ' ' + cy(c[1]); });
+    add(s, el('path', { d: d }, 'fx-field'));
+    for (var j2 = 0; j2 < PR; j2++) for (var i2 = 0; i2 < PC; i2++) {
+      var on = path.some(function (c) { return c[0] === i2 && c[1] === j2; });
+      add(s, el('rect', {
+        x: cx(i2) - 3.5, y: cy(j2) - 3.5, width: 7, height: 7
+      }, on ? 'fx-dot-f' : 'fx-box'));
+    }
+    host.appendChild(s);
+  }
+
+  function figGen(host) {
+    var s = svg('0 0 ' + PW + ' ' + PH), sx = 12, sy = PH / 2;
+    /* three long rows rather than fifteen short segments: same structure,
+       a third of the marks, and it reads as a fan instead of a mesh */
+    for (var j = 0; j < PR; j++) {
+      add(s, el('path', { d: 'M' + sx + ' ' + sy + ' L' + cx(0) + ' ' + cy(j) }, 'fx-thin'));
+      add(s, el('path', { d: 'M' + cx(0) + ' ' + cy(j) + ' H' + (cx(PC - 1) + 14) }, 'fx-thin'));
+    }
+    for (var j2 = 0; j2 < PR; j2++) for (var i = 0; i < PC; i++) {
+      add(s, el('circle', { cx: cx(i), cy: cy(j2), r: 3 }, 'fx-dot'));
+    }
+    add(s, el('rect', { x: sx - 6, y: sy - 6, width: 12, height: 12 }, 'fx-dot-f'));
+    add(s, el('path', { d: 'M' + (cx(PC - 1) + 14) + ' ' + cy(0) + ' V' + cy(PR - 1) }, 'fx-field'));
+    host.appendChild(s);
+  }
+
+  function figExec(host) {
+    var s = svg('0 0 ' + PW + ' ' + PH), bw = 44, y0 = 20, h = PH - 44;
+    for (var i = 0; i < PC; i++) {
+      var x = 22 + i * 52;
+      add(s, el('rect', { x: x, y: y0, width: bw, height: h, opacity: i ? .5 : 1 },
+        i ? 'fx-thin' : 'fx-field'));
+      for (var j = 0; j < PR; j++) {
+        add(s, el('rect', {
+          x: x + 7, y: y0 + 9 + j * 24, width: bw - 14, height: 10
+        }, i ? 'fx-soft' : 'fx-dot-f'));
+      }
+    }
+    add(s, el('path', { d: 'M22 ' + (y0 + h + 10) + ' H' + (22 + PC * 52 - 8) }, 'fx-thin'));
+    host.appendChild(s);
+  }
+
+  /* ==========================================================================
+     SLOT FIELD — a lattice behind the demo placeholder, on canvas so it can
+     hold a much denser point field cheaply.
+     ========================================================================== */
+  function slotField(cv) {
+    var box = cv.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = Math.max(600, box.width | 0), h = Math.max(280, box.height | 0);
+    cv.width = w * dpr; cv.height = h * dpr;
+    var c = cv.getContext('2d'); c.scale(dpr, dpr);
+    c.clearRect(0, 0, w, h);
+    var gapx = 26, gapy = 22;
+    for (var x = gapx; x < w; x += gapx) {
+      for (var y = gapy; y < h; y += gapy) {
+        var d = Math.abs(x - w / 2) / (w / 2);
+        c.fillStyle = 'rgba(237,236,231,' + (0.05 + 0.16 * d) + ')';
+        c.fillRect(x, y, 1.4, 1.4);
+      }
+    }
+    c.strokeStyle = 'rgba(237,236,231,0.10)';
+    c.lineWidth = 1;
+    for (var i = 1; i < 4; i++) {
+      c.beginPath(); c.moveTo(w * i / 4, 0); c.lineTo(w * i / 4, h); c.stroke();
+    }
+  }
+
+  /* ==========================================================================
+     BEHAVIOUR
+     ========================================================================== */
+  function reveal() {
+    var items = document.querySelectorAll('.rv');
+    if (!('IntersectionObserver' in window) || reduced) {
+      items.forEach(function (e) { e.classList.add('in'); }); return;
+    }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: .05 });
+    items.forEach(function (e) { io.observe(e); });
+  }
+
+  /* status rail + nav: the document reports which sheet you are reading */
+  function tracking() {
+    var secs = Array.prototype.slice.call(document.querySelectorAll('section[id]'));
+    var railN = document.getElementById('rail-sec');
+    var railT = document.getElementById('rail-name');
+    var links = Array.prototype.slice.call(document.querySelectorAll('#nav a'));
+    if (!secs.length || !('IntersectionObserver' in window)) return;
+
+    /* Section number comes off data-n rather than an array index, so adding,
+       removing or reordering sections cannot desync the readout. */
+    var names = {
+      top: 'Kronus',
+      s01: 'Why Kronus',
+      s02: 'How it works',
+      s03: 'Demonstration',
+      s04: 'Company',
+      s05: 'Partner with us'
+    };
+
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var id = e.target.id;
+        if (railN) railN.textContent = e.target.getAttribute('data-n') || '00';
+        if (railT) railT.textContent = names[id] || '';
+        links.forEach(function (a) {
+          a.toggleAttribute('data-on', a.getAttribute('href') === '#' + id);
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    secs.forEach(function (x) { io.observe(x); });
+  }
+
+  /* ────────────────────────────────────────────────────────── hero sequence
+     Stagger the words in, then walk the final word through the list and stop
+     on the last one. Widths and the clip height are measured rather than
+     assumed, so the box tracks the clamped type size and settles correctly
+     once the webfont has loaded. */
+  function heroSequence() {
+    var h1 = document.getElementById('hero-h1');
+    var flip = document.getElementById('flip');
+    var track = document.getElementById('flip-track');
+    if (!h1 || !flip || !track) return;
+
+    var words = Array.prototype.slice.call(track.querySelectorAll('.fw'));
+    if (!words.length) return;
+    var i = 0;
+
+    var wordH = 0;
+
+    /* Height only. Width is left to the box's own shrink-to-fit, which is the
+       widest word — so the box never resizes and the line's first letter is
+       fixed. Writing width was what moved things. */
+    function measure() {
+      wordH = 0;
+      words.forEach(function (w) { wordH = Math.max(wordH, w.offsetHeight); });
+      if (wordH) flip.style.height = wordH + 'px';
+    }
+
+    /* Translate in PIXELS off the measured word height. A percentage resolves
+       against the track's own height — four words tall — so translateY(-100%)
+       would jump the whole stack instead of one line. */
+    function show(n) {
+      i = n;
+      track.style.transform = 'translateY(' + (-n * wordH) + 'px)';
+    }
+
+    var LAST_WORD_IN = 250 + 700;   /* delay + duration of the third word */
+    var SETTLE = 850;               /* beat before the first flip */
+    var HOLD = 1450;                /* between flips */
+
+    function step() {
+      if (i >= words.length - 1) return;
+      show(i + 1);
+      if (i < words.length - 1) setTimeout(step, HOLD);
+    }
+
+    function begin() {
+      measure();
+      if (reduced) { h1.classList.add('in'); show(words.length - 1); return; }
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { h1.classList.add('in'); });
+      });
+      setTimeout(step, LAST_WORD_IN + SETTLE);
+    }
+
+    /* Wait for Archivo before measuring, so nothing re-measures mid-sequence
+       and nudges the layout. Timeout in case fonts.ready never settles. */
+    var started = false;
+    function start() { if (started) return; started = true; begin(); }
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(start);
+      setTimeout(start, 1400);
+    } else {
+      start();
+    }
+
+    var tid;
+    window.addEventListener('resize', function () {
+      clearTimeout(tid);
+      tid = setTimeout(function () {
+        var prev = track.style.transition;
+        track.style.transition = 'none';
+        measure(); show(i);
+        requestAnimationFrame(function () { track.style.transition = prev; });
+      }, 140);
+    });
+  }
+
+  /* -------------------------------------------------------------------- init */
+  function init() {
+    guard(reveal);                       /* first, so content is never stuck hidden */
+    guard(tracking);
+    guard(heroSequence);
+    guard(function () {
+      var g = document.getElementById('fig-growth'); if (g) figGrowth(g);
+    });
+    [['fig-capture', figCapture], ['fig-spec', figSpec],
+     ['fig-gen', figGen], ['fig-exec', figExec]].forEach(function (pair) {
+      guard(function () {
+        var n = document.getElementById(pair[0]); if (n) pair[1](n);
+      });
+    });
+    guard(function () {
+      var cv = document.getElementById('slot-canvas');
+      if (!cv) return;
+      slotField(cv);
+      var tid; window.addEventListener('resize', function () {
+        clearTimeout(tid); tid = setTimeout(function () { slotField(cv); }, 180);
+      });
+    });
+  }
+
+  document.readyState === 'loading'
+    ? document.addEventListener('DOMContentLoaded', init)
+    : init();
+})();
+</script>
+</body>
 </html>
